@@ -6,24 +6,5 @@ class User < ApplicationRecord
 
   enum status: [:inactive, :active]
 
-  def create
-
-  end
-
-  def login
-
-  end
-
-  def records
-
-  end
-
-  def records_by_clinic
-
-  end
-
-  def validate
-
-  end
 
 end
