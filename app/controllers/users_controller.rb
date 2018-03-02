@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
+
   def create
   end
 
   def login
+    #PEGAR INSURANCE COM SENHA
+    @user = Insurance.find_by(:email => params[:user][:email].downcase)
+
+    return render :json => { :error => "User does not exist" }, :status => 400 if @user.nil?
+
+    render :show, :status => 202
   end
 
   def records

@@ -1,41 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'insurances/search_users'
-
-  get 'insurances/create'
-
-  get 'insurances/login'
-
-  get 'insurances/records'
-
-  get 'insurances/records_by_clinic'
-
-  get 'insurances/search_user'
-
-  get 'clinics/create'
-
-  get 'clinics/login'
-
-  get 'clinics/records'
-
-  get 'clinics/records_by_clinic'
-
-  get 'clinics/upload_file'
-
-  get 'clinics/search_users_by_clinic'
-
-  get 'clinics/search_users'
-
-  get 'users/create'
-
-  get 'users/login'
-
-  get 'users/records'
-
-  get 'users/records_by_clinic'
-
-  get 'users/validate'
-
   resource :user, only: [:create] do
     member do
       get :records
@@ -67,14 +31,14 @@ Rails.application.routes.draw do
 
   resource :insurance, only: [:create] do
     post :login
-    resources :users, only: [] do
+    resources :users, :controller => :insurances, only: [] do
       get :records
-      resources :clinic, only: [] do
-        get :records
+      resources :clinic, :controller => :insurances, only: [] do
+        get :records, to: 'insurances#records_by_clinic'
       end
     end
-    resources :user, only: [] do
-      post :search
+    resources :user, :controller => :insurances, only: [] do
+      post :search, to: 'insurances#search_users'
     end
   end
 

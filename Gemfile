@@ -26,6 +26,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'rake', '12.3.0'
+gem 'responders'
 
 gem 'rabl'
 # Also add either `oj` or `yajl-ruby` as the JSON parser

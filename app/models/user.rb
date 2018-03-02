@@ -6,5 +6,12 @@ class User < ApplicationRecord
 
   enum status: [:inactive, :active]
 
+  def clinics
+    result = []
+    records.includes(:owner_clinic).each do |r|
+      result.append(r.owner_clinic)
+    end
+    result.uniq
+  end
 
 end
