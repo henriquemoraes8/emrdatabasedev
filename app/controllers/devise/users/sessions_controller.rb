@@ -2,6 +2,7 @@
 
 module Devise
   class Users::SessionsController < Devise::SessionsController
+    #protect_from_forgery with: :null_session
     #include Accessible
     #skip_before_action :check_session, only: :destroy
 
@@ -14,10 +15,10 @@ module Devise
 
     # POST /resource/sign_in
     def create
-      puts "HEHREH\n\n"
-      super
-      puts "GOT CURRENT USER #{current_user.id}"
-      redirect_to :login_user_path
+      super do
+        render json: { user: current_user,
+                       token: form_authenticity_token }.to_json and return
+      end
     end
 
     # DELETE /resource/sign_out

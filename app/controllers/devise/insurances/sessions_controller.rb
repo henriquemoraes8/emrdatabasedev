@@ -14,9 +14,10 @@ module Devise
 
     # POST /resource/sign_in
     def create
-      super
-      puts "GOT CURRENT USER #{current_user.id}"
-      redirect_to :login_user_path
+      super do
+        render json: { user: current_insurance,
+                       token: form_authenticity_token }.to_json and return
+      end
     end
 
     # DELETE /resource/sign_out

@@ -13,9 +13,12 @@ module Devise
     # end
 
     # POST /resource/sign_in
-    # def create
-    #   super
-    # end
+    def create
+      super do
+        render json: { user: current_user,
+                       token: form_authenticity_token }.to_json and return
+      end
+    end
 
     # DELETE /resource/sign_out
     # def destroy
