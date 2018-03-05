@@ -1,4 +1,7 @@
 class ClinicsController < ApplicationController
+
+  before_action :authenticate_clinic!
+
   def create
   end
 

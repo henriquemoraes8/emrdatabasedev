@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  devise_for :clinics, :path => 'clinics', :controllers => { sessions: "devise/clinics/sessions",
+                                                             registrations: "devise/clinics/registrations",
+                                                             passwords: "devise/clinics/passwords"}
+  devise_for :insurances, :path => 'insurances', :controllers => { sessions: "devise/insurances/sessions",
+                                                                   registrations: "devise/insurances/registrations",
+                                                                   passwords: "devise/insurances/passwords"}
+  devise_for :users, :path => 'users', :controllers => { sessions: "devise/users/sessions",
+                                                         registrations: "devise/users/registrations",
+                                                         passwords: "devise/users/passwords"}
   resource :user, only: [:create] do
     member do
       get :records

@@ -32,6 +32,8 @@ gem 'rabl'
 # Also add either `oj` or `yajl-ruby` as the JSON parser
 gem 'oj'
 
+gem 'devise'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

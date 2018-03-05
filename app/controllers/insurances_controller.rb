@@ -1,5 +1,7 @@
 class InsurancesController < ApplicationController
 
+  before_action :authenticate_insurance!
+
   def create
     @insurance = Insurance.new(insurance_params)
 
