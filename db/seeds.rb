@@ -13,17 +13,17 @@ ShareRequest.destroy_all
 Record.destroy_all
 Address.destroy_all
 
-User.create(name: 'Ricardo', email: 'r@gmail.com', social: '12341234', phone: '8921470142738', birthDate: Date.new(1990, 3, 2))
-User.create(name: 'Roberto', email: 'rob@gmail.com', social: '09128375', phone: '234562321', birthDate: Date.new(1989, 3, 2))
-User.create(name: 'Amanda', email: 'amanda@gmail.com', social: '23914876', phone: '7855262346', birthDate: Date.new(1988, 3, 2))
-User.create(name: 'Kenny', email: 'kenn@gmail.com', social: '4271864968', phone: '7347246', birthDate: Date.new(1987, 3, 2))
+User.create(name: 'Ricardo', email: 'r@gmail.com', password: 'A12344321', social: '12341234', phone: '8921470142738', birthDate: Date.new(1990, 3, 2))
+User.create(name: 'Roberto', email: 'rob@gmail.com', password: 'A12344321', social: '09128375', phone: '234562321', birthDate: Date.new(1989, 3, 2))
+User.create(name: 'Amanda', email: 'amanda@gmail.com', password: 'A12344321', social: '23914876', phone: '7855262346', birthDate: Date.new(1988, 3, 2))
+User.create(name: 'Kenny', email: 'kenn@gmail.com', password: 'A12344321', social: '4271864968', phone: '7347246', birthDate: Date.new(1987, 3, 2))
 
-Clinic.create(name: 'Miami Cardiology', phone: '42987132', email: 'miami@cardiology.com')
-Clinic.create(name: 'Orthopedists Heaven', phone: '4214323441', email: 'miami@ortho.com')
-Clinic.create(name: 'Brawling Brain', phone: '43212551', email: 'miami@brain.com')
+Clinic.create(name: 'Miami Cardiology', phone: '42987132', email: 'miami@cardiology.com', password: 'A12344321')
+Clinic.create(name: 'Orthopedists Heaven', phone: '4214323441', email: 'miami@ortho.com', password: 'A12344321')
+Clinic.create(name: 'Brawling Brain', phone: '43212551', email: 'miami@brain.com', password: 'A12344321')
 
-Insurance.create(name: 'Progressive', phone: '4298557132', email: 'miami@prog.com')
-Insurance.create(name: 'Blue Cross', phone: '421436623441', email: 'blue@cross.com')
+Insurance.create(name: 'Progressive', phone: '4298557132', email: 'miami@prog.com', password: 'A12344321')
+Insurance.create(name: 'Blue Cross', phone: '421436623441', email: 'blue@cross.com', password: 'A12344321')
 
 User.all.each do |u|
   Address.create(street: '1300 S Miami Ave', zip: '33130', state: 'FL', city: 'Miami', apt:"#{u.id + 100}", user_id: u.id)

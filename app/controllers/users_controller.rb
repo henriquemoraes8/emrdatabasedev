@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def login
     #PEGAR INSURANCE COM SENHA
+    puts "PARAMS #{params}"
     @user = Insurance.find_by(:email => params[:user][:email].downcase)
 
     return render :json => { :error => "User does not exist" }, :status => 400 if @user.nil?
