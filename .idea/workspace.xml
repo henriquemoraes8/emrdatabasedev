@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68768905-500b-4664-8c4a-6df2f6e38c28" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/views/users/index.rabl" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/clinics_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/clinics_controller.rb" />
       <change beforePath="$PROJECT_DIR$/app/controllers/devise/clinics/registrations_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/devise/clinics/registrations_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/devise/clinics/sessions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/devise/clinics/sessions_controller.rb" />
       <change beforePath="$PROJECT_DIR$/app/controllers/devise/insurances/registrations_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/devise/insurances/registrations_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/devise/insurances/sessions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/devise/insurances/sessions_controller.rb" />
       <change beforePath="$PROJECT_DIR$/app/controllers/devise/users/registrations_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/devise/users/registrations_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/devise/users/sessions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/devise/users/sessions_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/insurances_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/insurances_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/users_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/models/clinic.rb" afterPath="$PROJECT_DIR$/app/models/clinic.rb" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
-      <change beforePath="$PROJECT_DIR$/app/views/users/show.rabl" afterPath="$PROJECT_DIR$/app/views/users/show.rabl" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -39,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/app/models/user.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+              <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -58,8 +44,8 @@
       <file leaf-file-name="registrations_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/devise/users/registrations_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="46" column="126" lean-forward="false" selection-start-line="46" selection-start-column="81" selection-end-line="46" selection-end-column="126" />
+            <state relative-caret-position="225">
+              <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="18" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -68,8 +54,8 @@
       <file leaf-file-name="registrations_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/devise/insurances/registrations_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="47" column="119" lean-forward="false" selection-start-line="47" selection-start-column="119" selection-end-line="47" selection-end-column="119" />
+            <state relative-caret-position="255">
+              <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -88,8 +74,18 @@
       <file leaf-file-name="registrations_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/devise/clinics/registrations_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="52" column="73" lean-forward="false" selection-start-line="52" selection-start-column="73" selection-end-line="52" selection-end-column="73" />
+            <state relative-caret-position="225">
+              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sessions_controller.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/devise/users/sessions_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="6" lean-forward="true" selection-start-line="17" selection-start-column="6" selection-end-line="20" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -106,20 +102,10 @@
         </entry>
       </file>
       <file leaf-file-name="index.rabl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/records/index.rabl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.rabl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/users/index.rabl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="1" column="21" lean-forward="true" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+              <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -129,7 +115,7 @@
         <entry file="file://$PROJECT_DIR$/app/views/users/show.rabl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+              <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -499,12 +485,12 @@
       <option name="presentableId" value="Default" />
       <updated>1518880186588</updated>
       <workItem from="1518880187788" duration="13727000" />
-      <workItem from="1519827679479" duration="30035000" />
+      <workItem from="1519827679479" duration="30157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43762000" />
+    <option name="totallyTimeSpent" value="43884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="37" y="23" width="1280" height="747" extended-state="0" />
@@ -782,14 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/devise/users/sessions_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -883,7 +861,7 @@
     <entry file="file://$PROJECT_DIR$/app/models/user.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -899,7 +877,7 @@
     <entry file="file://$PROJECT_DIR$/app/views/users/index.rabl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="1" column="21" lean-forward="true" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -907,7 +885,7 @@
     <entry file="file://$PROJECT_DIR$/app/views/users/show.rabl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -920,22 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/devise/users/registrations_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="46" column="126" lean-forward="false" selection-start-line="46" selection-start-column="81" selection-end-line="46" selection-end-column="126" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/devise/insurances/registrations_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="47" column="119" lean-forward="false" selection-start-line="47" selection-start-column="119" selection-end-line="47" selection-end-column="119" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/devise/clinics/sessions_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -944,10 +906,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/devise/users/sessions_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="6" lean-forward="true" selection-start-line="17" selection-start-column="6" selection-end-line="20" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/devise/users/registrations_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="18" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/devise/insurances/registrations_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/devise/clinics/registrations_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="52" column="73" lean-forward="false" selection-start-line="52" selection-start-column="73" selection-end-line="52" selection-end-column="73" />
+        <state relative-caret-position="225">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
           <folding />
         </state>
       </provider>

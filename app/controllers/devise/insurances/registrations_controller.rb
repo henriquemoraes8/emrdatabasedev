@@ -13,9 +13,12 @@ module Devise
     # end
 
     # POST /resource
-    # def create
-    #   super
-    # end
+    def create
+      super do
+        render json: { insurance: current_insurance,
+                       token: form_authenticity_token }.to_json and return
+      end
+    end
 
     # GET /resource/edit
     # def edit
