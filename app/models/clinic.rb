@@ -8,5 +8,8 @@ class Clinic < ApplicationRecord
   has_many :owned_records, :class_name => 'Record', foreign_key: 'clinic_id'
   has_and_belongs_to_many :records
 
+  def users
+    User.where(id: records.map{|r| r.user_id})
+  end
 
 end

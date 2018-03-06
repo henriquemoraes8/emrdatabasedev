@@ -27,6 +27,8 @@ Insurance.create(name: 'Blue Cross', phone: '421436623441', email: 'blue@cross.c
 
 User.all.each do |u|
   Address.create(street: '1300 S Miami Ave', zip: '33130', state: 'FL', city: 'Miami', apt:"#{u.id + 100}", user_id: u.id)
+  u.insurance = Insurance.offset(rand(Insurance.count)).first
+  u.save
 end
 Clinic.all.each do |u|
   Address.create(street: '1310 S Miami Ave', zip: '33130', state: 'FL', city: 'Miami', apt:"#{u.id + 300}", clinic_id: u.id)
@@ -47,3 +49,4 @@ Clinic.all.each do |c|
     c.records.push(Record.offset(rand(Record.count)).first)
   end
 end
+

@@ -2,25 +2,17 @@ class UsersController < ApplicationController
 
   before_action :authenticate_user!
 
-  def create
-  end
-
-  def login
-    #PEGAR INSURANCE COM SENHA
-    puts "PARAMS #{params}"
-    @user = Insurance.find_by(:email => params[:user][:email].downcase)
-
-    return render :json => { :error => "User does not exist" }, :status => 400 if @user.nil?
-
-    render :show, :status => 202
-  end
-
   def records
+    @records = current_user.records
+    render 'records/index', :status => 202
   end
 
   def records_by_clinic
+    @records = current_user.records.where(:clinic_id => params[:clinic_id])
+    render 'records/index', :status => 202
   end
 
   def validate
   end
+
 end

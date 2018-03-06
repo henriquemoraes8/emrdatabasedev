@@ -22,9 +22,11 @@ module Devise
     end
 
     # DELETE /resource/sign_out
-    # def destroy
-    #   super
-    # end
+    def destroy
+      super do
+        render json: { success: true }.to_json and return
+      end
+    end
 
     # protected
 

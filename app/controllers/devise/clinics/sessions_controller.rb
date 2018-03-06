@@ -15,15 +15,17 @@ module Devise
     # POST /resource/sign_in
     def create
       super do
-        render json: { user: current_user,
+        render json: { clinic: current_clinic,
                        token: form_authenticity_token }.to_json and return
       end
     end
 
     # DELETE /resource/sign_out
-    # def destroy
-    #   super
-    # end
+    def destroy
+      super do
+        render json: { success: true }.to_json and return
+      end
+    end
 
     # protected
 

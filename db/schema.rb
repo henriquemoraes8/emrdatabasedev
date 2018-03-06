@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305173852) do
+ActiveRecord::Schema.define(version: 20180306044715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,8 +119,10 @@ ActiveRecord::Schema.define(version: 20180305173852) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.bigint "insurance_id"
     t.index ["address_id"], name: "index_users_on_address_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["insurance_id"], name: "index_users_on_insurance_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["social"], name: "index_users_on_social", unique: true
   end
@@ -137,4 +139,5 @@ ActiveRecord::Schema.define(version: 20180305173852) do
   add_foreign_key "share_requests", "clinics"
   add_foreign_key "share_requests", "users"
   add_foreign_key "users", "addresses"
+  add_foreign_key "users", "insurances"
 end

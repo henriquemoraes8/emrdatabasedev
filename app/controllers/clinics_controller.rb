@@ -2,38 +2,33 @@ class ClinicsController < ApplicationController
 
   before_action :authenticate_clinic!
 
-  def create
-  end
-
-  def login
-    #PEGAR LOGIN COM SENHA
-    @clinic = Insurance.find_by(:email => params[:clinic][:email].downcase)
-
-    return render :json => { :error => "Clinic does not exist" }, :status => 400 if @clinic.nil?
-
-    render :show, :status => 202
-  end
-
   def records
-    user = User.find(params[:user_id])
-    @records = user.records
-    #IMPLEMENTAR LOGICA SE TIVER PERMISSAO
-    return render 'records/index', :status => 202
+    @records = current_clinic.records
+    render 'records/index', :status => 202
   end
 
   def records_by_clinic
-
+    @records = current_clinic.records.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
+    render 'records/index', :status => 202
   end
 
   def upload_file
 
   end
 
-  def search_users_by_clinic
-
+  def search_all_users
+    @users = User.all
+    unless params[:email].blank?
+      @user = @users.where("email like ?", params[:email])
+    end
+    unless params[:phone].blank?
+      @user = @users.where("phone like ?", params[:phone])
+    end
+    render 'users/index', :status => 202
   end
 
   def search_users
-
+    @users = current_clinic.users.search(params[:name], params[:phone], params[:email], params[:social])
+    render 'users/index', :status => 202
   end
 end
