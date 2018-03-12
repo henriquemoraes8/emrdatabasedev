@@ -48,5 +48,11 @@ Clinic.all.each do |c|
   (1..5).each do
     c.records.push(Record.offset(rand(Record.count)).first)
   end
+
+  User.all.each do |u|
+    unless c.users.contains(u)
+      ShareRequest.create(user_id: u.id, clinic_id: c.id)
+    end
+  end
 end
 

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
                                                          passwords: "devise/users/passwords"}
   resource :user, only: [] do
     member do
-      get :records
+      get :records, :clinics
       resources :clinic, only: [] do
         get :records, to: 'users#records_by_clinic'
       end
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :users, :controller => :clinics, only: [] do
       get :records
       post :record, to: 'clinics#upload_file'
+      post :access, to: 'clinics#access'
       resources :clinic, only: [] do
         get :records, to: 'clinics#records_by_clinic'
       end

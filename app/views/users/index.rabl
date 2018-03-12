@@ -1,2 +1,2 @@
 collection @users, :root => "users", :object_root => false
-extends('users/show')
+extends('users/show_full')

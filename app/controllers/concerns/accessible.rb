@@ -6,15 +6,15 @@ module Accessible
 
   protected
   def check_session
-    if current_clinic
+    if !current_clinic.nil?
       flash.clear
-      redirect_to(new_clinic_session_path) && return
-    elsif current_insurance
+      render json: { online_session: 2 }.to_json and return
+    elsif !current_insurance.nil?
       flash.clear
-      redirect_to(new_insurance_session_path) && return
-    elsif current_user
+      render json: { online_session: 3 }.to_json and return
+    elsif !current_user.nil?
       flash.clear
-      redirect_to(login_user_path) && return
+      render json: { online_session: 1 }.to_json and return
     end
   end
 end
