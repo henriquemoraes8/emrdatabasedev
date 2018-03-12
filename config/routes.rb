@@ -12,8 +12,12 @@ Rails.application.routes.draw do
   resource :user, only: [] do
     member do
       get :records, :clinics
-      resources :clinic, only: [] do
+      resources :clinics, only: [] do
         get :records, to: 'users#records_by_clinic'
+      end
+      resources :requests, only: [] do
+        post :approve, to: 'users#approve_request'
+        post :deny, to: 'users#deny_request'
       end
     end
     post :validate
