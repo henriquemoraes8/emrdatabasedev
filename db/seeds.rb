@@ -13,10 +13,10 @@ ShareRequest.destroy_all
 Record.destroy_all
 Address.destroy_all
 
-User.create(name: 'Ricardo', email: 'r@gmail.com', password: 'A12344321', social: '12341234', phone: '8921470142738', birthDate: Date.new(1990, 3, 2))
-User.create(name: 'Roberto', email: 'rob@gmail.com', password: 'A12344321', social: '09128375', phone: '234562321', birthDate: Date.new(1989, 3, 2))
-User.create(name: 'Amanda', email: 'amanda@gmail.com', password: 'A12344321', social: '23914876', phone: '7855262346', birthDate: Date.new(1988, 3, 2))
-User.create(name: 'Kenny', email: 'kenn@gmail.com', password: 'A12344321', social: '4271864968', phone: '7347246', birthDate: Date.new(1987, 3, 2))
+User.create(name: 'Ricardo', email: 'r@gmail.com', password: 'A12344321', social: '12341234', phone: '8921470142738', insurance_unique_id: "A83209381", birthDate: Date.new(1990, 3, 2))
+User.create(name: 'Roberto', email: 'rob@gmail.com', password: 'A12344321', social: '09128375', phone: '234562321', insurance_unique_id: "B83209381", birthDate: Date.new(1989, 3, 2))
+User.create(name: 'Amanda', email: 'amanda@gmail.com', password: 'A12344321', social: '23914876', phone: '7855262346', insurance_unique_id: "C83209381", birthDate: Date.new(1988, 3, 2))
+User.create(name: 'Kenny', email: 'kenn@gmail.com', password: 'A12344321', social: '4271864968', phone: '7347246', insurance_unique_id: "D83209381", birthDate: Date.new(1987, 3, 2))
 
 Clinic.create(name: 'Miami Cardiology', phone: '42987132', email: 'miami@cardiology.com', password: 'A12344321')
 Clinic.create(name: 'Orthopedists Heaven', phone: '4214323441', email: 'miami@ortho.com', password: 'A12344321')
@@ -38,7 +38,7 @@ Insurance.all.each do |u|
 end
 
 (1..50).each do |i|
-  r = Record.new(url: "google.com/#{i}")
+  r = Record.new(url: "https://www.ghs.org/wp-content/uploads/2015/11/medical-record.jpg", name: "record #{i}", mime_type: "image/jpeg")
   r.user = User.offset(rand(User.count)).first
   r.owner_clinic = Clinic.offset(rand(Clinic.count)).first
   r.save
@@ -50,7 +50,7 @@ Clinic.all.each do |c|
   end
 
   User.all.each do |u|
-    unless c.users.contains(u)
+    unless c.users.include?(u)
       ShareRequest.create(user_id: u.id, clinic_id: c.id)
     end
   end
