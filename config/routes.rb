@@ -20,7 +20,10 @@ Rails.application.routes.draw do
         post :deny, to: 'users#deny_request'
       end
     end
-    post :validate
+  end
+
+  resources :users, only: [] do
+    post :validate, :verify
   end
 
   resource :clinic, only: [] do

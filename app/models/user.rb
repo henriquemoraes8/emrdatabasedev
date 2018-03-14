@@ -6,9 +6,12 @@ class User < ApplicationRecord
   has_many :share_requests, :dependent => :destroy
   has_many :records, -> {order 'created_at DESC'}, :dependent => :destroy
   has_one :address, :dependent => :destroy
+  has_one :validation, :dependent => :destroy
   belongs_to :insurance, :optional => true
 
   enum status: [:inactive, :active]
+
+  before_save :default_values
 
   scope :search, -> (name, phone, email, social) {
     name_query = "%#{name.nil? ? "" : name.downcase}%"
@@ -24,6 +27,16 @@ class User < ApplicationRecord
       result.append(r.owner_clinic)
     end
     result.uniq
+  end
+
+  def phone_digits
+    phone.scan(/\d/).join('')
+  end
+
+  private
+
+  def default_values
+    self.status ||= User.statuses[:inactive]
   end
 
 end
