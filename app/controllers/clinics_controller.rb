@@ -5,7 +5,11 @@ class ClinicsController < ApplicationController
   before_action :authenticate
 
   def authenticate
+<<<<<<< HEAD
     @clinic = Clinic.find_by(email: "miami@cardiology.com") #request.headers['X-USER-EMAIL'])
+=======
+    @clinic = Clinic.find_by(email: request.headers['X-USER-EMAIL'])
+>>>>>>> 37ef9b20805fa10c37177a3facb8e1a3af58b69f
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
@@ -36,6 +40,7 @@ class ClinicsController < ApplicationController
     unless params[:social].blank?
       @user = @users.where("social like ?", params[:phone])
     end
+
     render 'users/index', :status => 202
   end
 
