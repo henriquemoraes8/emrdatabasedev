@@ -6,7 +6,7 @@ class ClinicsController < ApplicationController
 
   def authenticate
     @clinic = Clinic.find_by(email: request.headers['X-USER-EMAIL'])
-    render json: {success: false}, :status => 401 if @user.nil?
+    render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
   def records
@@ -29,13 +29,7 @@ class ClinicsController < ApplicationController
   end
 
   def search_all_users
-    @users = User.all
-    unless params[:email].blank?
-      @user = @users.where("email like ?", params[:email])
-    end
-    unless params[:phone].blank?
-      @user = @users.where("phone like ?", params[:phone])
-    end
+    @users = User.where("email like ?", params[:email])
     render 'users/index', :status => 202
   end
 
