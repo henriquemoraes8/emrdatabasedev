@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resource :clinic, only: [] do
     resources :users, :controller => :clinics, only: [] do
       get :records
+      get :details, to: 'clinics#user_details'
       post :record, to: 'clinics#upload_file'
       post :access, to: 'clinics#access'
       resources :clinic, only: [] do
@@ -49,6 +50,7 @@ Rails.application.routes.draw do
   resource :insurance, only: [] do
     resources :users, :controller => :insurances, only: [] do
       get :records
+      get :details, to: 'insurances#user_details'
       resources :clinic, :controller => :insurances, only: [] do
         get :records, to: 'insurances#records_by_clinic'
       end

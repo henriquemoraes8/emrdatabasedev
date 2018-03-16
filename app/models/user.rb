@@ -33,6 +33,10 @@ class User < ApplicationRecord
     phone.scan(/\d/).join('')
   end
 
+  def social
+    self[:social].gsub(/(?=\d{5})\d/,"*")
+  end
+
   private
 
   def default_values

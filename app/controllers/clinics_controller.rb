@@ -5,8 +5,8 @@ class ClinicsController < ApplicationController
   before_action :authenticate
 
   def authenticate
-    @clinic = Clinic.find_by(email: request.headers['X-USER-EMAIL'])
-    render json: {success: false}, :status => 401 if @user.nil?
+    @clinic = Clinic.find_by(email: "miami@cardiology.com") #request.headers['X-USER-EMAIL'])
+    render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
   def records
@@ -33,8 +33,8 @@ class ClinicsController < ApplicationController
     unless params[:email].blank?
       @user = @users.where("email like ?", params[:email])
     end
-    unless params[:phone].blank?
-      @user = @users.where("phone like ?", params[:phone])
+    unless params[:social].blank?
+      @user = @users.where("social like ?", params[:phone])
     end
     render 'users/index', :status => 202
   end
@@ -42,6 +42,12 @@ class ClinicsController < ApplicationController
   def search_users
     @users = @clinic.users.search(params[:name], params[:phone], params[:email], params[:social])# current_clinic.users.search(params[:name], params[:phone], params[:email], params[:social])
     render 'users/index', :status => 202
+  end
+
+  def user_details
+    @user = @clinic.users.find_by(id: params[:user_id])
+    (render json: {success: false, message: "user does not belong to clinic"}, :status => 406 && return) if @user.nil?
+    render 'users/show_full', :status => 202
   end
 
   def pending
