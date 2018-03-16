@@ -33,7 +33,7 @@ gem 'rabl'
 gem 'oj'
 
 gem 'devise'
-
+gem 'azure', '~> 0.7.3'
 gem 'rack-cors', :require => 'rack/cors'
 
 # Use Redis adapter to run Action Cable in production
