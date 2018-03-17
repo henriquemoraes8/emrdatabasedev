@@ -33,6 +33,7 @@ gem 'rabl'
 gem 'oj'
 
 gem 'devise'
+gem 'devise-token_authenticatable'
 
 gem 'rack-cors', :require => 'rack/cors'
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314023734) do
+ActiveRecord::Schema.define(version: 20180317170250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,10 @@ ActiveRecord::Schema.define(version: 20180314023734) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.text "authentication_token"
+    t.datetime "authentication_token_created_at"
     t.index ["address_id"], name: "index_clinics_on_address_id"
+    t.index ["authentication_token"], name: "index_clinics_on_authentication_token", unique: true
     t.index ["reset_password_token"], name: "index_clinics_on_reset_password_token", unique: true
   end
 
@@ -76,7 +79,10 @@ ActiveRecord::Schema.define(version: 20180314023734) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.text "authentication_token"
+    t.datetime "authentication_token_created_at"
     t.index ["address_id"], name: "index_insurances_on_address_id"
+    t.index ["authentication_token"], name: "index_insurances_on_authentication_token", unique: true
     t.index ["reset_password_token"], name: "index_insurances_on_reset_password_token", unique: true
   end
 
@@ -123,7 +129,10 @@ ActiveRecord::Schema.define(version: 20180314023734) do
     t.inet "last_sign_in_ip"
     t.bigint "insurance_id"
     t.string "insurance_unique_id"
+    t.text "authentication_token"
+    t.datetime "authentication_token_created_at"
     t.index ["address_id"], name: "index_users_on_address_id"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["insurance_id"], name: "index_users_on_insurance_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
