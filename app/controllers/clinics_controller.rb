@@ -2,14 +2,10 @@ class ClinicsController < ApplicationController
 
   #before_action :authenticate_clinic
 
-  before_action :authenticate
+  before_action :authenticate, except: [:upload_file]
 
   def authenticate
-<<<<<<< HEAD
-    @clinic = Clinic.find_by(email: "miami@cardiology.com") #request.headers['X-USER-EMAIL'])
-=======
     @clinic = Clinic.find_by(email: request.headers['X-USER-EMAIL'])
->>>>>>> 37ef9b20805fa10c37177a3facb8e1a3af58b69f
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
@@ -29,7 +25,29 @@ class ClinicsController < ApplicationController
   end
 
   def upload_file
+    @user = User.find_by(id: params[:user_id])
+    puts @user.name
 
+    #AZURE CONNECTION TO BLOB IMAGES
+    blobs = Azure::Blob::BlobService.new
+    blobs.set_container_acl("uploads", "container")
+
+    file = params[:file]
+
+    #Create randon
+    rand_name=SecureRandom.urlsafe_base64(5)
+    thumb_final_name = "#{rand_name}_#{file.original_filename}"
+
+    #Parse thumb and send to azuere
+    thumb_content = file.read
+    puts file.content_type
+    puts thumb_content.size
+
+    blob = blobs.create_block_blob("uploads", "#{thumb_final_name}", thumb_content)
+
+    puts "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
+
+    render 'users/show_full', :status => 202
   end
 
   def search_all_users
@@ -50,8 +68,13 @@ class ClinicsController < ApplicationController
   end
 
   def user_details
-    @user = @clinic.users.find_by(id: params[:user_id])
-    (render json: {success: false, message: "user does not belong to clinic"}, :status => 406 && return) if @user.nil?
+    @user = User.find_by(id: params[:user_id]) #@user = @clinic.users.find_by(id: params[:user_id])
+
+    #Rique mesmo eu n tendo acesso a todas as infos dele, precisa trazer o basico no minimo para montar a tela de detalhe conforme wire frame
+    #Essa validação cabe para trazer dados como os reports dele para cada clinic, ai sim... teriamos que mover esse metodo pra uma rota comun de usuario
+    #Pois as infos basicas e a clinica que ele pertence aparece no wire... ou muda o wire...
+
+    #(render json: {success: false, message: "user does not belong to clinic"}, :status => 406 && return) if @user.nil?
     render 'users/show_full', :status => 202
   end
 
