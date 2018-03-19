@@ -23,8 +23,14 @@ class ClinicsController < ApplicationController
   end
 
   def upload_file
+
+    #try auth clinic, Henrique como a frame do angular de upload n deixar eu colocar header estou passando o token por parametro
+    @clinic = Clinic.find_by_authentication_token(params[:clinic_token])
+    render json: {success: false}, :status => 401 if @clinic.nil?
+
+    #try upload to user
     @user = User.find_by(id: params[:user_id])
-    puts @user.name
+    render json: {success: false}, :status => 401 if @user.nil?
 
     #AZURE CONNECTION TO BLOB IMAGES
     blobs = Azure::Blob::BlobService.new
@@ -44,6 +50,10 @@ class ClinicsController < ApplicationController
     blob = blobs.create_block_blob("uploads", "#{thumb_final_name}", thumb_content)
 
     puts "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
+
+    #Henrique então vc tem o User que a clinica vai gravar o doc, e a Clinica que ta mandando
+    #Path do arquivo feito upload = "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
+    #Nome original do arquivo = file.original_filename
 
     render 'users/show_full', :status => 202
   end
