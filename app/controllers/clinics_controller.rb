@@ -59,13 +59,7 @@ class ClinicsController < ApplicationController
   end
 
   def search_all_users
-    @users = User.all
-    unless params[:email].blank?
-      @user = @users.where("email like ?", params[:email])
-    end
-    unless params[:social].blank?
-      @user = @users.where("social like ?", params[:phone])
-    end
+    @users = User.where(email: params[:email])
 
     render 'users/index', :status => 202
   end
