@@ -1,21 +1,19 @@
 class ClinicsController < ApplicationController
 
-  #before_action :authenticate_clinic
-
   before_action :authenticate, except: [:upload_file]
 
   def authenticate
-    @clinic = Clinic.find_by(email: request.headers['X-USER-EMAIL'])
+    @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
   def records
-    @records = @clinic.records # current_clinic.records
+    @records = @clinic.records
     render 'records/index', :status => 202
   end
 
   def records_by_clinic
-    @records = @clinic.records.where(user_id: params[:user_id], clinic_id: params[:clinic_id])# current_clinic.records.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
+    @records = @clinic.records.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
     render 'records/index', :status => 202
   end
 
@@ -63,7 +61,7 @@ class ClinicsController < ApplicationController
   end
 
   def search_users
-    @users = @clinic.users.search(params[:name], params[:phone], params[:email], params[:social])# current_clinic.users.search(params[:name], params[:phone], params[:email], params[:social])
+    @users = @clinic.users.search(params[:name], params[:phone], params[:email], params[:social])
     render 'users/index', :status => 202
   end
 

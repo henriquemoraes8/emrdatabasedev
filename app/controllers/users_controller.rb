@@ -4,8 +4,6 @@ class UsersController < ApplicationController
   require 'net/https'
   require 'uri'
 
-  #before_action :authenticate_user!
-  #
   before_action :authenticate, except: [:validate, :verify]
 
   def validate
@@ -41,17 +39,17 @@ class UsersController < ApplicationController
   end
 
   def authenticate
-    @user = User.find_by(email: request.headers['X-USER-EMAIL'])
+    @user = User.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {message: "email does not exist"}, :status => 401 if @user.nil?
   end
 
   def records
-    @records = @user.records #current_user.records
+    @records = @user.records
     render 'records/index', :status => 202
   end
 
   def records_by_clinic
-    @records = @user.records.where(:clinic_id => params[:clinic_id]) #current_user.records.where(:clinic_id => params[:clinic_id])
+    @records = @user.records.where(:clinic_id => params[:clinic_id])
     render 'records/index', :status => 202
   end
 
