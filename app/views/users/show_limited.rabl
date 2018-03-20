@@ -1,2 +1,2 @@
 object @user
-attributes :id, :status
+attributes :id, :name, :status

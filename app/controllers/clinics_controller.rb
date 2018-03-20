@@ -3,7 +3,7 @@ class ClinicsController < ApplicationController
   before_action :authenticate, except: [:upload_file]
 
   def authenticate
-    @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
+    @clinic = Clinic.find_by_email("miami@cardiology.com") #Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
@@ -40,7 +40,7 @@ class ClinicsController < ApplicationController
     file = params[:file]
 
     #Create randon
-    rand_name=SecureRandom.urlsafe_base64(5)
+    rand_name = SecureRandom.urlsafe_base64(5)
     thumb_final_name = "#{rand_name}_#{file.original_filename}"
 
     #Parse thumb and send to azuere
@@ -62,9 +62,32 @@ class ClinicsController < ApplicationController
   end
 
   def search_all_users
-    @users = User.where(email: params[:email])
+    unless params[:email].nil?
+      @users = User.where(email: params[:email])
+      render 'users/index_limited', :status => 202
+      return
+    end
 
-    render 'users/index', :status => 202
+    unless params[:social].nil?
+      @users = User.where(social: params[:social])
+      render 'users/index_limited', :status => 202
+      return
+    end
+
+    unless params[:phone].nil?
+      @users = User.where(phone: params[:phone])
+      render 'users/index_limited', :status => 202
+      return
+    end
+
+    unless params[:name].nil? || params[:birth_date].nil?
+      @users = User.birth_date_query(params[:birth_date].to_date).where("lower(name) like ?", params[:name])
+      render 'users/index_limited', :status => 202
+      return
+    end
+
+    @users = []
+    render 'users/index_limited', :status => 202
   end
 
   def search_users

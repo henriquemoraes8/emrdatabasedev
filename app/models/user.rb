@@ -22,6 +22,8 @@ class User < ApplicationRecord
     where("lower(name) like ? AND phone like ? AND lower(email) like ? AND social like ?", name_query, phone_query, email_query, social_query)
   }
 
+  scope :birth_date_query, -> (start_date) { where birth_date: start_date.all_day }
+
   def clinics
     result = []
     records.includes(:owner_clinic).each do |r|

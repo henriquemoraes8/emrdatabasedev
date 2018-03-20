@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 20180320025406) do
     t.string "social"
     t.string "email"
     t.string "phone"
-    t.date "birthDate"
+    t.date "birth_date"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
