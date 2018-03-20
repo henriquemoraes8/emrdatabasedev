@@ -19,6 +19,7 @@ class ClinicsController < ApplicationController
 
   def access
     @share_request = ShareRequest.create(user_id: params[:user_id], clinic_id: @clinic.id)
+    ValidationMailer.validation_email(@share_request).deliver
     render 'share_requests/show', :status => 202
   end
 
