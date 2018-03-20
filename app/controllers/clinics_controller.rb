@@ -1,21 +1,19 @@
 class ClinicsController < ApplicationController
 
-  #before_action :authenticate_clinic
-
   before_action :authenticate, except: [:upload_file]
 
   def authenticate
-    @clinic = Clinic.find_by(email: request.headers['X-USER-EMAIL'])
+    @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
   def records
-    @records = @clinic.records # current_clinic.records
+    @records = @clinic.records
     render 'records/index', :status => 202
   end
 
   def records_by_clinic
-    @records = @clinic.records.where(user_id: params[:user_id], clinic_id: params[:clinic_id])# current_clinic.records.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
+    @records = @clinic.records.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
     render 'records/index', :status => 202
   end
 
@@ -25,8 +23,14 @@ class ClinicsController < ApplicationController
   end
 
   def upload_file
+
+    #try auth clinic, Henrique como a frame do angular de upload n deixar eu colocar header estou passando o token por parametro
+    @clinic = Clinic.find_by_authentication_token(params[:clinic_token])
+    render json: {success: false}, :status => 401 if @clinic.nil?
+
+    #try upload to user
     @user = User.find_by(id: params[:user_id])
-    puts @user.name
+    render json: {success: false}, :status => 401 if @user.nil?
 
     #AZURE CONNECTION TO BLOB IMAGES
     blobs = Azure::Blob::BlobService.new
@@ -47,23 +51,21 @@ class ClinicsController < ApplicationController
 
     puts "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
 
+    #Henrique então vc tem o User que a clinica vai gravar o doc, e a Clinica que ta mandando
+    #Path do arquivo feito upload = "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
+    #Nome original do arquivo = file.original_filename
+
     render 'users/show_full', :status => 202
   end
 
   def search_all_users
-    @users = User.all
-    unless params[:email].blank?
-      @user = @users.where("email like ?", params[:email])
-    end
-    unless params[:social].blank?
-      @user = @users.where("social like ?", params[:phone])
-    end
+    @users = User.where(email: params[:email])
 
     render 'users/index', :status => 202
   end
 
   def search_users
-    @users = @clinic.users.search(params[:name], params[:phone], params[:email], params[:social])# current_clinic.users.search(params[:name], params[:phone], params[:email], params[:social])
+    @users = @clinic.users.search(params[:name], params[:phone], params[:email], params[:social])
     render 'users/index', :status => 202
   end
 
