@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68768905-500b-4664-8c4a-6df2f6e38c28" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/cache/azure-0.7.10.gem" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/cache/azure-core-0.1.14.gem" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/cache/faraday-0.14.0.gem" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/cache/faraday_middleware-0.12.2.gem" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/cache/mime-types-3.1.gem" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/cache/mime-types-data-3.2016.0521.gem" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/cache/multipart-post-2.0.0.gem" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/cache/systemu-2.6.5.gem" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/clinics_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/clinics_controller.rb" />
-    </list>
+    <list default="true" id="68768905-500b-4664-8c4a-6df2f6e38c28" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
     <ignored path="$PROJECT_DIR$/public/system/" />
@@ -529,7 +516,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59678000" />
+    <option name="totallyTimeSpent" value="59818000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="9" y="23" width="1280" height="747" extended-state="0" />
