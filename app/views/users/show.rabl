@@ -1,4 +1,4 @@
 object @user
-attributes :id, :name, :social, :email, :status
+attributes :id, :name, :social, :email, :status, :phone
 
 child (:address) { extends('addresses/show') }

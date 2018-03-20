@@ -18,7 +18,7 @@ class ClinicsController < ApplicationController
   end
 
   def access
-    @share_request = ShareRequest.create(user_id: params[:user_id], clinic_id: current_clinic.id)
+    @share_request = ShareRequest.create(user_id: params[:user_id], clinic_id: @clinic.id)
     render 'share_requests/show', :status => 202
   end
 
@@ -26,11 +26,11 @@ class ClinicsController < ApplicationController
 
     #try auth clinic, Henrique como a frame do angular de upload n deixar eu colocar header estou passando o token por parametro
     @clinic = Clinic.find_by_authentication_token(params[:clinic_token])
-    render json: {success: false}, :status => 401 if @clinic.nil?
+    render json: {success: false, message: "clinic not valid"}, :status => 401 if @clinic.nil?
 
     #try upload to user
-    @user = User.find_by(id: params[:user_id])
-    render json: {success: false}, :status => 401 if @user.nil?
+    @user = @clinic.users.find_by(id: params[:user_id])
+    render json: {success: false, message: "user not validated on clinic"}, :status => 401 if @user.nil?
 
     #AZURE CONNECTION TO BLOB IMAGES
     blobs = Azure::Blob::BlobService.new
@@ -51,11 +51,13 @@ class ClinicsController < ApplicationController
 
     puts "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
 
-    #Henrique então vc tem o User que a clinica vai gravar o doc, e a Clinica que ta mandando
     #Path do arquivo feito upload = "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
-    #Nome original do arquivo = file.original_filename
 
-    render 'users/show_full', :status => 202
+    @record = Record.create(user_id: @user.id, clinic_id: @clinic.id, name: file.original_filename, url: thumb_final_name, mime_type: "image/jpeg")
+    approved_clinics = @user.clinics - [@clinic]
+    approved_clinics.map { |c| c.records << @record }
+
+    render 'records/show', :status => 202
   end
 
   def search_all_users
@@ -70,23 +72,23 @@ class ClinicsController < ApplicationController
   end
 
   def user_details
-    @user = User.find_by(id: params[:user_id]) #@user = @clinic.users.find_by(id: params[:user_id])
+    @user = User.find_by(id: params[:user_id])
 
     #Rique mesmo eu n tendo acesso a todas as infos dele, precisa trazer o basico no minimo para montar a tela de detalhe conforme wire frame
     #Essa validação cabe para trazer dados como os reports dele para cada clinic, ai sim... teriamos que mover esse metodo pra uma rota comun de usuario
     #Pois as infos basicas e a clinica que ele pertence aparece no wire... ou muda o wire...
 
-    #(render json: {success: false, message: "user does not belong to clinic"}, :status => 406 && return) if @user.nil?
-    render 'users/show_full', :status => 202
+    (render json: {success: false, message: "user does not exist"}, :status => 406 && return) if @user.nil?
+    render 'users/show_limited', :status => 202
   end
 
   def pending
-    @share_requests = @clinic.share_requests.where(status: ShareRequest.statuses[:pending]) # current_clinic.share_requests.where(status: ShareRequest.statuses[:pending])
+    @share_requests = @clinic.share_requests.where(status: ShareRequest.statuses[:pending])
     render 'share_requests/index', :status => 202
   end
 
   def approved
-    @share_requests = @clinic.share_requests.where(status: ShareRequest.statuses[:approved]) #  current_clinic.share_requests.where(status: ShareRequest.statuses[:approved])
+    @share_requests = @clinic.share_requests.where(status: ShareRequest.statuses[:approved])
     render 'share_requests/index', :status => 202
   end
 

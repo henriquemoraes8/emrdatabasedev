@@ -11,7 +11,7 @@ Rails.application.routes.draw do
                                                          passwords: "devise/users/passwords"}
   resource :user, only: [] do
     member do
-      get :records, :clinics
+      get :records, :clinics, :requests
       resources :clinics, only: [] do
         get :records, to: 'users#records_by_clinic'
       end

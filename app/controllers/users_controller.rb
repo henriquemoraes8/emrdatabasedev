@@ -6,6 +6,11 @@ class UsersController < ApplicationController
 
   before_action :authenticate, except: [:validate, :verify]
 
+  def authenticate
+    @user = User.find_by_authentication_token(request.headers['X-TOKEN'])
+    render json: {message: "email does not exist"}, :status => 401 if @user.nil?
+  end
+
   def validate
     user = User.find_by(id: params[:user_id])
     (render json: {message: "user does not exist"}, :status => 404 if user.nil?) && return
@@ -38,11 +43,6 @@ class UsersController < ApplicationController
     render json: {success: true}, :status => 202
   end
 
-  def authenticate
-    @user = User.find_by_authentication_token(request.headers['X-TOKEN'])
-    render json: {message: "email does not exist"}, :status => 401 if @user.nil?
-  end
-
   def records
     @records = @user.records
     render 'records/index', :status => 202
@@ -64,7 +64,12 @@ class UsersController < ApplicationController
       render json: {message: "no request found", success: false}, :status => 404 && return
     end
     request.status = ShareRequest.statuses[:approved]
+
+    clinic = request.clinic
+    @user.records.map { |r| clinic.records << r }
+
     request.save
+
     render json: {success: true}, :status => 202
   end
 
@@ -76,6 +81,11 @@ class UsersController < ApplicationController
     request.status = ShareRequest.statuses[:denied]
     request.save
     render json: {success: true}, :status => 202
+  end
+
+  def requests
+    @share_requests = @user.share_requests
+    render 'share_requests/index', :status => 202
   end
 
 end

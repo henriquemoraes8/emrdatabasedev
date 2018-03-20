@@ -5,7 +5,7 @@ class InsurancesController < ApplicationController
   before_action :authenticate
 
   def authenticate
-    @insurance = Insurance.find_by(email: request.headers['X-USER-EMAIL'])
+    @insurance = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false}, :status => 401 if @insurance.nil?
   end
 
