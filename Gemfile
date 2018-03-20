@@ -37,6 +37,7 @@ gem 'devise-token_authenticatable'
 
 gem 'azure', '~> 0.7.3'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'figaro'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

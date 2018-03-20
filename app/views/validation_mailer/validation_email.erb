@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>Hello, <%= @user.name %></h2>
+    <p>
+      <%= @clinic.name %> has requested access to your medical files
+      <br><br>
+      To allow access, <a href="https://emr-database.herokuapp.com/#/request?request_token=<%= @token %>">please click here</a>
+      <br><br>
+      Best regards,
+    </p>
+    <h2>EMeRge team</h2>
+  </body>
+</html>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :requests, param: :token, only: [] do
         post :approve, to: 'users#approve_request'
         post :deny, to: 'users#deny_request'
+        get :info, to: 'users#info_by_request_token'
       end
     end
   end

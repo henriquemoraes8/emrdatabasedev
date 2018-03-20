@@ -4,12 +4,8 @@ class UsersController < ApplicationController
   require 'net/https'
   require 'uri'
 
-  before_action :authenticate, except: [:validate, :verify]
-
-  def authenticate
-    @user = User.find_by_authentication_token(request.headers['X-TOKEN'])
-    render json: {message: "email does not exist"}, :status => 401 if @user.nil?
-  end
+  before_action :authenticate, except: [:validate, :verify, :info_by_request_token, :approve_request, :deny_request]
+  before_action :authenticate_request, only: [:info_by_request_token, :approve_request, :deny_request]
 
   def validate
     user = User.find_by(id: params[:user_id])
@@ -58,34 +54,43 @@ class UsersController < ApplicationController
     render 'clinics/index', :status => 202
   end
 
+  def info_by_request_token
+    @user = @request.user
+    render 'users/show_limited', :status => 202
+  end
+
   def approve_request
-    request = @user.share_requests.find_by(token: params[:request_token])
-    if request.nil?
-      render json: {message: "no request found", success: false}, :status => 404 && return
-    end
-    request.status = ShareRequest.statuses[:approved]
+    @request.status = ShareRequest.statuses[:approved]
 
-    clinic = request.clinic
-    @user.records.map { |r| clinic.records << r }
+    clinic = @request.clinic
+    @request.user.records.map { |r| clinic.records << r }
 
-    request.save
+    @request.save
 
     render json: {success: true}, :status => 202
   end
 
   def deny_request
-    request = @user.share_requests.find_by(token: params[:request_token])
-    if request.nil?
-      render json: {message: "no request found", success: false}, :status => 404 && return
-    end
-    request.status = ShareRequest.statuses[:denied]
-    request.save
+    @request.status = ShareRequest.statuses[:denied]
+    @request.save
     render json: {success: true}, :status => 202
   end
 
   def requests
     @share_requests = @user.share_requests
     render 'share_requests/index', :status => 202
+  end
+
+  protected
+
+  def authenticate
+    @user = User.find_by_authentication_token(request.headers['X-TOKEN'])
+    render json: {message: "email does not exist"}, :status => 401 if @user.nil?
+  end
+
+  def authenticate_request
+    @request = ShareRequest.find_by(token: params[:request_token])
+    render json: {message: "no request found", success: false}, :status => 404 if @request.nil?
   end
 
 end

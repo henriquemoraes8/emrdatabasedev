@@ -1,0 +1,10 @@
+Hello <%= @user.name %>,
+
+<%= @clinic.name %> has requested access to your medical files
+
+To allow access, please click on the following link
+https://emr-database.herokuapp.com/#/request?request_token=<%= @token %>
+
+Best regards,
+
+EMeRge team
