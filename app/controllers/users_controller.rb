@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   end
 
   def approve_request
-    request = @user.share_requests.find_by(id: params[:request_id])
+    request = @user.share_requests.find_by(token: params[:request_token])
     if request.nil?
       render json: {message: "no request found", success: false}, :status => 404 && return
     end
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
   end
 
   def deny_request
-    request = @user.share_requests.find_by(id: params[:request_id])
+    request = @user.share_requests.find_by(token: params[:request_token])
     if request.nil?
       render json: {message: "no request found", success: false}, :status => 404 && return
     end

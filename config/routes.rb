@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :clinics, only: [] do
         get :records, to: 'users#records_by_clinic'
       end
-      resources :requests, only: [] do
+      resources :requests, param: :token, only: [] do
         post :approve, to: 'users#approve_request'
         post :deny, to: 'users#deny_request'
       end
