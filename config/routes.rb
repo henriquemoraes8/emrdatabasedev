@@ -32,7 +32,12 @@ Rails.application.routes.draw do
       get :records
       get :details, to: 'clinics#user_details'
       post :record, to: 'clinics#upload_file'
-      post :access, to: 'clinics#access'
+
+      resource :access, only: [] do
+        post :sms, to: 'clinics#access_phone'
+        post :email, to: 'clinics#access_email'
+      end
+
       resources :clinic, only: [] do
         get :records, to: 'clinics#records_by_clinic'
       end

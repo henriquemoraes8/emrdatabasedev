@@ -1,9 +1,13 @@
 class ClinicsController < ApplicationController
 
+  require 'net/http'
+  require 'net/https'
+  require 'uri'
+
   before_action :authenticate, except: [:upload_file]
 
   def authenticate
-    @clinic = Clinic.find_by_email("miami@cardiology.com") #Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
+    @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
@@ -17,9 +21,24 @@ class ClinicsController < ApplicationController
     render 'records/index', :status => 202
   end
 
-  def access
+  def access_email
     @share_request = ShareRequest.create(user_id: params[:user_id], clinic_id: @clinic.id)
     ValidationMailer.validation_email(@share_request).deliver
+    render 'share_requests/show', :status => 202
+  end
+
+  def access_phone
+    @share_request = ShareRequest.create(user_id: params[:user_id], clinic_id: @clinic.id)
+    user = @share_request.user
+    link = "https://emr-database.herokuapp.com/#/request?request_token=#{@share_request.token}"
+
+    uri = URI.parse("https://textbelt.com/text")
+    Net::HTTP.post_form(uri, {
+        :phone => user.phone_digits,
+        :message => "#{@clinic.name} has requested access to your medical records. To allow, click on the following link #{link}",
+        :key => 'aa16cce9f3352b251c9c0aece4c17b4d645fbc23GxYXeLBAafH4YiQcdGrgixYZY',
+    })
+
     render 'share_requests/show', :status => 202
   end
 
