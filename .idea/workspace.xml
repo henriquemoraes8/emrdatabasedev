@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68768905-500b-4664-8c4a-6df2f6e38c28" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/controllers/clinics_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/clinics_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -40,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clinics_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="clinics_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/clinics_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1278">
-              <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+              <caret line="15" column="28" lean-forward="false" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -112,11 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="seeds.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="seeds.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/db/seeds.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="137" lean-forward="false" selection-start-line="17" selection-start-column="137" selection-end-line="17" selection-end-column="137" />
+            <state relative-caret-position="285">
+              <caret line="19" column="165" lean-forward="false" selection-start-line="19" selection-start-column="165" selection-end-line="19" selection-end-column="165" />
               <folding />
             </state>
           </provider>
@@ -195,12 +194,12 @@
         <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/share_requests/show.rabl" />
         <option value="$PROJECT_DIR$/db/migrate/20180217144845_create_users.rb" />
-        <option value="$PROJECT_DIR$/db/seeds.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/views/users/show_limited.rabl" />
         <option value="$PROJECT_DIR$/app/views/users/index_limited.rabl" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/controllers/clinics_controller.rb" />
+        <option value="$PROJECT_DIR$/db/seeds.rb" />
       </list>
     </option>
   </component>
@@ -484,12 +483,12 @@
       <workItem from="1519827679479" duration="30157000" />
       <workItem from="1520435450083" duration="88000" />
       <workItem from="1520804562489" duration="15202000" />
-      <workItem from="1521507522417" duration="18352000" />
+      <workItem from="1521507522417" duration="18597000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78379000" />
+    <option name="totallyTimeSpent" value="78624000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-24" y="23" width="1280" height="747" extended-state="0" />
@@ -799,14 +798,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/seeds.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="137" lean-forward="false" selection-start-line="17" selection-start-column="137" selection-end-line="17" selection-end-column="137" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/user.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
@@ -868,7 +859,15 @@
     <entry file="file://$PROJECT_DIR$/app/controllers/clinics_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1278">
-          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <caret line="15" column="28" lean-forward="false" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/seeds.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="165" lean-forward="false" selection-start-line="19" selection-start-column="165" selection-end-line="19" selection-end-column="165" />
           <folding />
         </state>
       </provider>
