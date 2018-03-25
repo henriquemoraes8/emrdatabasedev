@@ -81,32 +81,37 @@ class ClinicsController < ApplicationController
   end
 
   def search_all_users
-    unless params[:email].nil?
-      @users = User.where(email: params[:email])
-      render 'users/index_limited', :status => 202
-      return
-    end
-
-    unless params[:social].nil?
-      @users = User.where(social: params[:social])
-      render 'users/index_limited', :status => 202
-      return
-    end
-
-    unless params[:phone].nil?
-      @users = User.where(phone: params[:phone])
-      render 'users/index_limited', :status => 202
-      return
-    end
-
-    unless params[:name].nil? || params[:birth_date].nil?
-      @users = User.birth_date_query(params[:birth_date].to_date).where("lower(name) like ?", params[:name])
-      render 'users/index_limited', :status => 202
-      return
-    end
+    # unless params[:email].nil?
+    #   @users = User.where(email: params[:email])
+    #   render 'users/index_limited', :status => 202
+    #   return
+    # end
+    #
+    # unless params[:social].nil?
+    #   @users = User.where(social: params[:social])
+    #   render 'users/index_limited', :status => 202
+    #   return
+    # end
+    #
+    # unless params[:phone].nil?
+    #   @users = User.where(phone: params[:phone])
+    #   render 'users/index_limited', :status => 202
+    #   return
+    # end
+    #
+    # unless params[:name].nil? || params[:birth_date].nil?
+    #   @users = User.birth_date_query(params[:birth_date].to_date).where("lower(name) like ?", params[:name])
+    #   render 'users/index_limited', :status => 202
+    #   return
+    # end
 
     @users = []
-    render 'users/index_limited', :status => 202
+
+    user = User.find_by(name: params[:name], phone: params[:phone], birth_date: params[:birth_date].to_date)
+
+    @users = [user] unless user.nil?
+
+    render 'users/index', :status => 202
   end
 
   def search_users
@@ -115,14 +120,15 @@ class ClinicsController < ApplicationController
   end
 
   def user_details
-    @user = User.find_by(id: params[:user_id])
+    @user = @clinic.users.find_by(id: params[:user_id])
 
     #Rique mesmo eu n tendo acesso a todas as infos dele, precisa trazer o basico no minimo para montar a tela de detalhe conforme wire frame
     #Essa validação cabe para trazer dados como os reports dele para cada clinic, ai sim... teriamos que mover esse metodo pra uma rota comun de usuario
     #Pois as infos basicas e a clinica que ele pertence aparece no wire... ou muda o wire...
 
     (render json: {success: false, message: "user does not exist"}, :status => 406 && return) if @user.nil?
-    render 'users/show_limited', :status => 202
+    render 'users/show_full', :status => 202
+    #render 'users/show_limited', :status => 202
   end
 
   def pending
