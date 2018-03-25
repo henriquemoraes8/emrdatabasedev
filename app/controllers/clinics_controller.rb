@@ -120,7 +120,7 @@ class ClinicsController < ApplicationController
   end
 
   def user_details
-    @user = @clinic.users.find_by(id: params[:user_id])
+    @user = User.find_by(id: params[:user_id])
 
     #Rique mesmo eu n tendo acesso a todas as infos dele, precisa trazer o basico no minimo para montar a tela de detalhe conforme wire frame
     #Essa validação cabe para trazer dados como os reports dele para cada clinic, ai sim... teriamos que mover esse metodo pra uma rota comun de usuario
