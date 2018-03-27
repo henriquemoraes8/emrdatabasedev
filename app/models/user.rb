@@ -18,8 +18,7 @@ class User < ApplicationRecord
     name_query = "%#{name.nil? ? "" : name.downcase}%"
     phone_query = "%#{phone.nil? ? "" : phone.downcase}%"
     email_query = "%#{email.nil? ? "" : email.downcase}%"
-    social_query = "%#{social.nil? ? "" : social.downcase}%"
-    where("lower(name) like ? AND phone like ? AND lower(email) like ? AND social like ?", name_query, phone_query, email_query, social_query)
+    where("lower(name) like ? AND phone like ? AND lower(email) like ?", name_query, phone_query, email_query)
   }
 
   scope :birth_date_query, -> (start_date) { where birth_date: start_date.all_day }
@@ -32,10 +31,6 @@ class User < ApplicationRecord
     result.uniq
   end
 
-  def phone_digits
-    phone.scan(/\d/).join('')
-  end
-
   def social
     self[:social].gsub(/(?=\d{5})\d/,"*")
   end
@@ -44,6 +39,7 @@ class User < ApplicationRecord
 
   def default_values
     self.status ||= User.statuses[:inactive]
+    self.phone = phone.scan(/\d/).join('')
   end
 
 end

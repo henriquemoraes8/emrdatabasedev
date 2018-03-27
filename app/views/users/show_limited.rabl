@@ -1,2 +1,2 @@
 object @user
-attributes :id, :name, :phone, :status
+attributes :id, :name, :last_name, :phone, :status
