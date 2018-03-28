@@ -14,9 +14,8 @@ module Devise
 
     # POST /resource
     def create
-      super do
-        render json: { insurance: current_insurance,
-                       token: form_authenticity_token }.to_json and return
+      super do |resource|
+        render json: { insurance: resource }.to_json and return
       end
     end
 
@@ -48,7 +47,7 @@ module Devise
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :social, :phone, address: [:street, :city, :zip, :apt, :state]])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone, address: [:street, :city, :zip, :apt, :state]])
     end
 
     # If you have extra params to permit, append them to the sanitizer.

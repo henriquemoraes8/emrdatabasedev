@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_for :users, :path => 'users', :controllers => { sessions: "devise/users/sessions",
                                                          registrations: "devise/users/registrations",
                                                          passwords: "devise/users/passwords"}
-  resource :user, only: [] do
+  resource :user, only: [:update] do
     member do
       get :records, :clinics, :requests
       resources :clinics, only: [] do
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     post :validate, :verify
   end
 
-  resource :clinic, only: [] do
+  resource :clinic, only: [:update] do
     resources :users, :controller => :clinics, only: [] do
       get :records
       get :details, to: 'clinics#user_details'
@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :insurance, only: [] do
+  resource :insurance, only: [:update] do
     resources :users, :controller => :insurances, only: [] do
       get :records
       get :details, to: 'insurances#user_details'

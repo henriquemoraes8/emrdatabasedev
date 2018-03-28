@@ -6,9 +6,12 @@ class ClinicsController < ApplicationController
 
   before_action :authenticate, except: [:upload_file]
 
-  def authenticate
-    @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
-    render json: {success: false}, :status => 401 if @clinic.nil?
+  def update
+    if @clinic.update_with_password(clinic_params)
+      render 'clinics/show', :status => 202
+    else
+      render json: {message: "password not valid"}, :status => 401
+    end
   end
 
   def records
@@ -120,6 +123,17 @@ class ClinicsController < ApplicationController
   def approved
     @share_requests = @clinic.share_requests.where(status: ShareRequest.statuses[:approved])
     render 'share_requests/index', :status => 202
+  end
+
+  protected
+
+  def authenticate
+    @clinic = Clinic.find_by_email('miami@cardiology.com')# Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
+    render json: {success: false}, :status => 401 if @clinic.nil?
+  end
+
+  def clinic_params
+    params.require(:clinic).permit([:name, :phone, :email, :password, :password_confirmation, :current_password, address: [:street, :city, :zip, :apt, :state]])
   end
 
 end

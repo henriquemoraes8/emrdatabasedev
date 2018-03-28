@@ -7,6 +7,14 @@ class UsersController < ApplicationController
   before_action :authenticate, except: [:validate, :verify, :info_by_request_token, :approve_request, :deny_request]
   before_action :authenticate_request, only: [:info_by_request_token, :approve_request, :deny_request]
 
+  def update
+    if @user.update_with_password(user_params)
+      render 'users/show', :status => 202
+    else
+      render json: {message: "password not valid"}, :status => 401
+    end
+  end
+
   def validate
     user = User.find_by(id: params[:user_id])
     (render json: {message: "user does not exist"}, :status => 404 if user.nil?) && return
@@ -84,13 +92,17 @@ class UsersController < ApplicationController
   protected
 
   def authenticate
-    @user = User.find_by_email("r@gmail.com")#authentication_token(request.headers['X-TOKEN'])
-    render json: {message: "email does not exist"}, :status => 401 if @user.nil?
+    @user = User.find_by_authentication_token(request.headers['X-TOKEN'])
+    render json: {message: "user does not exist"}, :status => 401 if @user.nil?
   end
 
   def authenticate_request
     @request = ShareRequest.find_by(token: params[:request_token])
     render json: {message: "no request found", success: false}, :status => 404 if @request.nil?
+  end
+
+  def user_params
+    params.require(:user).permit([:name, :last_name, :email, :phone, :social, :birth_date, :password, :password_confirmation, :current_password, address: [:street, :city, :zip, :apt, :state]])
   end
 
 end

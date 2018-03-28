@@ -4,7 +4,7 @@ module Devise
     #include Accessible
 
     before_action :configure_sign_up_params, only: [:create]
-    # before_action :configure_account_update_params, only: [:update]
+    before_action :configure_account_update_params, :authenticate, only: [:update]
 
     # GET /resource/sign_up
     # def new
@@ -13,19 +13,13 @@ module Devise
 
     # POST /resource
     def create
-      super do
-        render json: { user: current_user,
-                       token: form_authenticity_token }.to_json and return
+      super do |resource|
+        render json: { user: resource }.to_json and return
       end
     end
 
     # GET /resource/edit
     # def edit
-    #   super
-    # end
-
-    # PUT /resource
-    # def update
     #   super
     # end
 
@@ -43,7 +37,7 @@ module Devise
     #   super
     # end
 
-    # protected
+    protected
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
@@ -51,9 +45,14 @@ module Devise
     end
 
     # If you have extra params to permit, append them to the sanitizer.
-    # def configure_account_update_params
-    #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-    # end
+    def configure_account_update_params
+      params.require(:user).permit([:name, :last_name, :phone, :birth_date, :password, :password_confirmation, :current_password, address: [:street, :city, :zip, :apt, :state]])
+    end
+
+    def authenticate
+      @user = User.find_by_email("r@gmail.com")#authentication_token(request.headers['X-TOKEN'])
+      render json: {message: "user does not exist"}, :status => 401 if @user.nil?
+    end
 
     # The path used after sign up.
     # def after_sign_up_path_for(resource)

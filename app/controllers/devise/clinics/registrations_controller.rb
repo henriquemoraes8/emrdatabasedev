@@ -14,9 +14,8 @@ module Devise
 
     # POST /resource
     def create
-      super do
-        render json: { clinic: current_clinic,
-                       token: form_authenticity_token }.to_json and return
+      super do |resource|
+        render json: { clinic: resource }.to_json and return
       end
     end
 
