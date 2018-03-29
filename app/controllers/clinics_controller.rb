@@ -20,7 +20,7 @@ class ClinicsController < ApplicationController
   end
 
   def records_by_clinic
-    @records = @clinic.records.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
+    @records = Record.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
     render 'records/index', :status => 202
   end
 
@@ -108,7 +108,7 @@ class ClinicsController < ApplicationController
 
     (render json: {success: false, message: "user does not exist"}, :status => 406 && return) if @user.nil?
 
-    if @clinic.users.includes?(@user)
+    if @clinic.users.include?(@user)
       render 'users/show_full', :status => 202
     else
       render 'users/show_limited', :status => 202
@@ -128,7 +128,7 @@ class ClinicsController < ApplicationController
   protected
 
   def authenticate
-    @clinic = Clinic.find_by_email('miami@cardiology.com')# Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
+    @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])#Clinic.find_by_email('miami@cardiology.com')
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
