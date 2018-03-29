@@ -88,7 +88,7 @@ class ClinicsController < ApplicationController
     phone = params[:phone] || ""
     phone = phone.scan(/\d/).join('')
 
-    @user = User.find_by('lower(name) = lower(?) AND lower(last_name) = lower(?) AND phone = ? AND birth_date = ?', params[:name], phone, params[:last_name], params[:birth_date])
+    @user = User.find_by('lower(name) = lower(?) AND lower(last_name) = lower(?) AND phone = ? AND birth_date = ?', params[:name], params[:last_name], phone, params[:birth_date].to_date)
 
     if @user.nil?
       render json: {}, :status => 202
