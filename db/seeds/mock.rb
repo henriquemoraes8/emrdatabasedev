@@ -42,6 +42,7 @@ end
   r = Record.new(url: "https://www.ghs.org/wp-content/uploads/2015/11/medical-record.jpg", name: "record #{i}", mime_type: "image/jpeg")
   r.user = User.offset(rand(User.count)).first
   r.owner_clinic = Clinic.offset(rand(Clinic.count)).first
+  r.record_type = RecordType.offset(rand(RecordType.count)).first
   r.save
 end
 

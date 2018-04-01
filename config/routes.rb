@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'record_types/index'
+
   devise_for :clinics, :path => 'clinics', :controllers => { sessions: "devise/clinics/sessions",
                                                              registrations: "devise/clinics/registrations",
                                                              passwords: "devise/clinics/passwords"}
@@ -65,5 +67,7 @@ Rails.application.routes.draw do
       post :users, to: 'insurances#search_users'
     end
   end
+
+  resources :record_types, only: [:index]
 
 end

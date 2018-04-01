@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327150049) do
+ActiveRecord::Schema.define(version: 20180330222252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 20180327150049) do
     t.index ["reset_password_token"], name: "index_insurances_on_reset_password_token", unique: true
   end
 
+  create_table "record_types", force: :cascade do |t|
+    t.string "name"
+    t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_record_types_on_parent_id"
+  end
+
   create_table "records", force: :cascade do |t|
     t.string "url"
     t.bigint "user_id"
@@ -94,7 +102,9 @@ ActiveRecord::Schema.define(version: 20180327150049) do
     t.bigint "clinic_id"
     t.string "name"
     t.string "mime_type"
+    t.bigint "record_type_id"
     t.index ["clinic_id"], name: "index_records_on_clinic_id"
+    t.index ["record_type_id"], name: "index_records_on_record_type_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end
 
@@ -158,6 +168,7 @@ ActiveRecord::Schema.define(version: 20180327150049) do
   add_foreign_key "clinics_records", "records"
   add_foreign_key "insurances", "addresses"
   add_foreign_key "records", "clinics"
+  add_foreign_key "records", "record_types"
   add_foreign_key "records", "users"
   add_foreign_key "share_requests", "clinics"
   add_foreign_key "share_requests", "users"
