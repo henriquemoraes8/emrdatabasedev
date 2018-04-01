@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="68768905-500b-4664-8c4a-6df2f6e38c28" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/app/controllers/insurances_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/insurances_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/views/records/show.rabl" afterPath="$PROJECT_DIR$/app/views/records/show.rabl" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -47,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="insurances_controller.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="insurances_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/insurances_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="40" column="5" lean-forward="false" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+            <state relative-caret-position="458">
+              <caret line="38" column="128" lean-forward="false" selection-start-line="38" selection-start-column="128" selection-end-line="38" selection-end-column="128" />
               <folding />
             </state>
           </provider>
@@ -77,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.rabl" pinned="false" current-in-tab="true">
+      <file leaf-file-name="show.rabl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/records/show.rabl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
-              <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+              <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -206,8 +205,8 @@
         <option value="$PROJECT_DIR$/app/views/record_types/show.rabl" />
         <option value="$PROJECT_DIR$/db/seeds/mock.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/insurances_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/records/show.rabl" />
+        <option value="$PROJECT_DIR$/app/controllers/insurances_controller.rb" />
       </list>
     </option>
   </component>
@@ -550,12 +549,12 @@
       <workItem from="1520435450083" duration="88000" />
       <workItem from="1520804562489" duration="15202000" />
       <workItem from="1521507522417" duration="18597000" />
-      <workItem from="1522112822311" duration="17302000" />
+      <workItem from="1522112822311" duration="17485000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100204000" />
+    <option name="totallyTimeSpent" value="100387000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -995,18 +994,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/insurances_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/records/show.rabl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="40" column="5" lean-forward="false" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+        <state relative-caret-position="45">
+          <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/records/show.rabl">
+    <entry file="file://$PROJECT_DIR$/app/controllers/insurances_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+        <state relative-caret-position="458">
+          <caret line="38" column="128" lean-forward="false" selection-start-line="38" selection-start-column="128" selection-end-line="38" selection-end-column="128" />
           <folding />
         </state>
       </provider>
