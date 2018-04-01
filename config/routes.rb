@@ -1,16 +1,32 @@
 Rails.application.routes.draw do
 
-  get 'record_types/index'
+  devise_for :clinics, skip: [:sessions, :registrations, :passwords, :confirmations, :omniauth_callbacks, :unlocks]
 
-  devise_for :clinics, :path => 'clinics', :controllers => { sessions: "devise/clinics/sessions",
-                                                             registrations: "devise/clinics/registrations",
-                                                             passwords: "devise/clinics/passwords"}
-  devise_for :insurances, :path => 'insurances', :controllers => { sessions: "devise/insurances/sessions",
-                                                                   registrations: "devise/insurances/registrations",
-                                                                   passwords: "devise/insurances/passwords"}
-  devise_for :users, :path => 'users', :controllers => { sessions: "devise/users/sessions",
-                                                         registrations: "devise/users/registrations",
-                                                         passwords: "devise/users/passwords"}
+  as :clinic do
+    post "/clinics/sign_in" => "devise/clinics/sessions#create", :as => :clinic_session
+    delete "/clinics/sign_out" => "devise/clinics/sessions#destroy", :as => :destroy_clinic_session
+    post "/clinics" => "devise/clinics/registrations#create", :as => :create_clinic
+    patch "/clinics" => "devise/clinics/registrations#update", :as => :update_clinic
+  end
+
+  devise_for :insurances, skip: [:sessions, :registrations, :passwords, :confirmations, :omniauth_callbacks, :unlocks]
+
+  as :insurance do
+    post "/insurances/sign_in" => "devise/insurance/sessions#create", :as => :insurance_session
+    delete "/insurances/sign_out" => "devise/insurance/sessions#destroy", :as => :destroy_insurance_session
+    post "/insurances" => "devise/insurances/registrations#create", :as => :create_insurance
+    patch "/insurances" => "devise/insurances/registrations#update", :as => :update_insurance
+  end
+
+  devise_for :users, skip: [:sessions, :registrations, :passwords, :confirmations, :omniauth_callbacks, :unlocks]
+
+  as :user do
+    post "/users/sign_in" => "devise/users/sessions#create", :as => :user_session
+    delete "/users/sign_out" => "devise/users/sessions#destroy", :as => :destroy_user_session
+    post "/users" => "devise/users/registrations#create", :as => :create_user
+    patch "/users" => "devise/users/registrations#update", :as => :update_user
+  end
+
   resource :user, only: [:update] do
     member do
       get :records, :clinics, :requests
