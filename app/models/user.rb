@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   before_save :default_values
 
-  scope :search, -> (name, phone, email, social) {
+  scope :search, -> (name, phone, email) {
     name_query = "%#{name.nil? ? "" : name.downcase}%"
     phone_query = "%#{phone.nil? ? "" : phone.downcase}%"
     email_query = "%#{email.nil? ? "" : email.downcase}%"

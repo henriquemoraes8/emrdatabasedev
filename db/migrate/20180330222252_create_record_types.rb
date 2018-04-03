@@ -6,7 +6,5 @@ class CreateRecordTypes < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-
-    add_reference :records, :record_type, foreign_key: true
   end
 end

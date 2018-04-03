@@ -16,11 +16,17 @@ class ClinicsController < ApplicationController
 
   def records
     @records = @clinic.records
+    unless params[:record_types].nil?
+      @records = @records.by_types(params[:record_types].split(',').map { |t| t.to_i })
+    end
     render 'records/index', :status => 202
   end
 
   def records_by_clinic
     @records = Record.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
+    unless params[:record_types].nil?
+      @records = @records.by_types(params[:record_types].split(',').map { |t| t.to_i })
+    end
     render 'records/index', :status => 202
   end
 
@@ -54,6 +60,7 @@ class ClinicsController < ApplicationController
     #try upload to user
     @user = @clinic.users.find_by(id: params[:user_id])
     render json: {success: false, message: "user not validated on clinic"}, :status => 401 if @user.nil?
+    render json: {success: false, message: "missing record types"}, :status => 401 if params[:record_types].nil?
 
     #AZURE CONNECTION TO BLOB IMAGES
     blobs = Azure::Blob::BlobService.new
@@ -76,7 +83,11 @@ class ClinicsController < ApplicationController
 
     #Path do arquivo feito upload = "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
 
-    @record = Record.create(user_id: @user.id, clinic_id: @clinic.id, name: file.original_filename, url: thumb_final_name, mime_type: "image/jpeg")
+    @record = Record.create(user_id: @user.id, clinic_id: @clinic.id, name: params[:name], url: thumb_final_name, mime_type: "image/jpeg")
+    params[:record_types].split(',').each do |t|
+      @record.record_types << RecordType.find(t.to_i)
+    end
+
     approved_clinics = @user.clinics - [@clinic]
     approved_clinics.map { |c| c.records << @record }
 
@@ -99,7 +110,7 @@ class ClinicsController < ApplicationController
   end
 
   def search_users
-    @users = @clinic.users.search(params[:name], params[:phone], params[:email], params[:social])
+    @users = @clinic.users.search(params[:name], params[:phone], params[:email])
     render 'users/index', :status => 202
   end
 

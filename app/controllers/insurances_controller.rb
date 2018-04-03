@@ -13,12 +13,18 @@ class InsurancesController < ApplicationController
   def records
     user = @insurance.users.find(params[:user_id])
     @records = user.records
+    unless params[:record_types].nil?
+      @records = @records.by_types(params[:record_types].split(',').map { |t| t.to_i })
+    end
     render 'records/index', :status => 202
   end
 
   def records_by_clinic
     user = @insurance.users.find(params[:user_id])
     @records = user.records.where(clinic_id: params[:clinic_id])
+    unless params[:record_types].nil?
+      @records = @records.by_types(params[:record_types].split(',').map { |t| t.to_i })
+    end
     render 'records/index', :status => 202
   end
 
@@ -36,7 +42,7 @@ class InsurancesController < ApplicationController
   protected
 
   def authenticate
-    @insurance = Insurance.find_by_authentication_token(request.headers['X-TOKEN']) #Insurance.find_by_email("miami@prog.com")# 
+    @insurance = Insurance.find_by_authentication_token(request.headers['X-TOKEN']) #Insurance.find_by_email("miami@prog.com")#
     render json: {success: false}, :status => 401 if @insurance.nil?
   end
 

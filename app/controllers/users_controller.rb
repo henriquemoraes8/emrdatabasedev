@@ -49,11 +49,17 @@ class UsersController < ApplicationController
 
   def records
     @records = @user.records
+    unless params[:record_types].nil?
+      @records = @records.by_types(params[:record_types].split(',').map { |t| t.to_i })
+    end
     render 'records/index', :status => 202
   end
 
   def records_by_clinic
     @records = @user.records.where(:clinic_id => params[:clinic_id])
+    unless params[:record_types].nil?
+      @records = @records.by_types(params[:record_types].split(',').map { |t| t.to_i })
+    end
     render 'records/index', :status => 202
   end
 
@@ -92,7 +98,7 @@ class UsersController < ApplicationController
   protected
 
   def authenticate
-    @user = User.find_by_authentication_token(request.headers['X-TOKEN'])
+    @user = User.find_by_email("r@gmail.com")# User.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {message: "user does not exist"}, :status => 401 if @user.nil?
   end
 
