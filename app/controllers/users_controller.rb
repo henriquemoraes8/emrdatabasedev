@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   require 'net/https'
   require 'uri'
 
-  before_action :authenticate, except: [:validate, :verify, :info_by_request_token, :approve_request, :deny_request]
+  before_action :authenticate, except: [:validate, :verify, :info_by_request_token, :approve_request, :deny_request, :consent_form]
   before_action :authenticate_request, only: [:info_by_request_token, :approve_request, :deny_request]
 
   def update
@@ -71,6 +71,18 @@ class UsersController < ApplicationController
   def info_by_request_token
     @user = @request.user
     render 'users/show_limited', :status => 202
+  end
+
+  def consent_form
+    @user = User.first
+    @address = @user.address
+    @is_patient = params[:isPatient] || true
+    @legal_name = params[:legal_name]
+    @legal_relationship = params[:legal_relation]
+
+    @html_content = render_to_string 'users/consent_form'
+    render :json => { :consent_form => @html_content }
+    #render 'users/consent_form'
   end
 
   def approve_request

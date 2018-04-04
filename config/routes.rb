@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resource :user, only: [:update] do
     member do
-      get :records, :clinics, :requests
+      get :records, :clinics, :requests, :consent_form
       resources :clinics, only: [] do
         get :records, to: 'users#records_by_clinic'
       end
