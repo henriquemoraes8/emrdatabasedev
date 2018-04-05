@@ -37,7 +37,7 @@ Rails.application.routes.draw do
         post :approve, to: 'users#approve_request'
         post :deny, to: 'users#deny_request'
         get :info, to: 'users#info_by_request_token'
-        patch :consent_form
+        patch :consent_form, to: 'users#consent_form'
       end
     end
   end
