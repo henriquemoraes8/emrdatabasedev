@@ -12,7 +12,9 @@ class User < ApplicationRecord
 
   enum status: [:inactive, :active]
 
-  before_save :default_values
+  before_create :default_values
+  before_save :adjust_phone
+  before_validation :guarantee_password
 
   scope :search, -> (name, phone, email) {
     name_query = "%#{name.nil? ? "" : name.downcase}%"
@@ -39,6 +41,13 @@ class User < ApplicationRecord
 
   def default_values
     self.status ||= User.statuses[:inactive]
+  end
+
+  def guarantee_password
+    self.password ||= SecureRandom.hex(4)
+  end
+
+  def adjust_phone
     self.phone = phone.scan(/\d/).join('')
   end
 
