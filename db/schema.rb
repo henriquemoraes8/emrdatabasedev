@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403052423) do
+ActiveRecord::Schema.define(version: 20180404234038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,9 @@ ActiveRecord::Schema.define(version: 20180403052423) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token", null: false
+    t.boolean "is_patient"
+    t.string "legal_rep_name"
+    t.string "legal_rep_relation"
     t.index ["clinic_id"], name: "index_share_requests_on_clinic_id"
     t.index ["user_id"], name: "index_share_requests_on_user_id"
   end

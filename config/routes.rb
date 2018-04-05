@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resource :user, only: [:update] do
     member do
-      get :records, :clinics, :requests, :consent_form
+      get :records, :clinics, :requests
       resources :clinics, only: [] do
         get :records, to: 'users#records_by_clinic'
       end
@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         post :approve, to: 'users#approve_request'
         post :deny, to: 'users#deny_request'
         get :info, to: 'users#info_by_request_token'
+        patch :consent_form
       end
     end
   end

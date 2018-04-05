@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   require 'uri'
 
   before_action :authenticate, except: [:validate, :verify, :info_by_request_token, :approve_request, :deny_request, :consent_form]
-  before_action :authenticate_request, only: [:info_by_request_token, :approve_request, :deny_request]
+  before_action :authenticate_request, only: [:info_by_request_token, :approve_request, :deny_request, :consent_form]
 
   def update
     if @user.update_with_password(user_params)
@@ -74,9 +74,9 @@ class UsersController < ApplicationController
   end
 
   def consent_form
-    @user = User.first
+    @user = @request.user
     @address = @user.address
-    @is_patient = params[:isPatient] || true
+    @is_patient = params[:is_patient] || true
     @legal_name = params[:legal_name]
     @legal_relationship = params[:legal_relation]
 
@@ -87,6 +87,9 @@ class UsersController < ApplicationController
 
   def approve_request
     @request.status = ShareRequest.statuses[:approved]
+    @request.is_patient = params[:is_patient] || true
+    @request.legal_rep_name = params[:legal_name]
+    @request.legal_rep_relation = params[:legal_relation]
 
     clinic = @request.clinic
     @request.user.records.map { |r| clinic.records << r }

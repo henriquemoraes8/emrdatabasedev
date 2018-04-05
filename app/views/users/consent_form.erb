@@ -939,29 +939,16 @@ are the: [ <%= "X" if @is_patient %> ] Patient      [ <%= "X" unless @is_
 
   <% if !@is_patient %>
 
-  <p class=MsoNormal><b><span style='font-size:14.0pt;font-family:"Calibri",sans-serif'>X</span></b><span
+  <p class=MsoNormal><b><span style='font-size:14.0pt;font-family:"Calibri",sans-serif'>X <%= @legal_name %></span></b><span
   style='font-size:9.0pt;font-family:"Calibri",sans-serif'>  
-
                                                                      </span></p>
 
-  <p class=MsoNormal><span style='font-family:"Calibri",sans-serif'>Signature of
+  <p class=MsoNormal><span style='font-family:"Calibri",sans-serif'>Name of
 Patient or Patient’s Legal Representative                                        </span></p>
 
   <p class=MsoNormal><span style='font-family:"Calibri",sans-serif'>&nbsp;</span></p>
 
-  <p class=MsoNormal><span style='font-family:"Calibri",sans-serif'>If you are
-are the legal representative, check one to describe the relationship of Legal
-Representative to Patient (if applicable):</span></p>
-
-  <p class=MsoNormal style='text-indent:.5in'><span style='font-family:Wingdings'>p</span><span
-  style='font-family:"Calibri",sans-serif'> Parent of minor        </span></p>
-
-  <p class=MsoNormal style='text-indent:.5in'><span style='font-family:Wingdings'>p</span><span
-  style='font-family:"Calibri",sans-serif'> Guardian          </span></p>
-
-  <p class=MsoNormal style='text-indent:.5in'><span style='font-family:Wingdings'>p</span><span
-  style='font-family:"Calibri",sans-serif'> Other personal representative
-(explain: )</span></p>
+    <p class=MsoNormal><span style='font-family:"Calibri",sans-serif'>Relationship to patient: <b><%= @legal_relationship %></b></span></p>
 
   <p class=MsoNormal><b><span style='font-size:8.0pt;font-family:"Calibri",sans-serif'>&nbsp;</span></b></p>
 
