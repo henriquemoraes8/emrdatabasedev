@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   require 'net/https'
   require 'uri'
 
-  before_action :authenticate, except: [:validate, :verify, :info_by_request_token, :approve_request, :deny_request, :consent_form]
+  before_action :authenticate, except: [:records, :records_by_clinic, :clinics, :requests]
   before_action :authenticate_request, only: [:info_by_request_token, :approve_request, :deny_request, :consent_form]
 
   def update
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         :message => "Hello #{user.name}, your verification code is #{code}",
         :key => 'aa16cce9f3352b251c9c0aece4c17b4d645fbc23GxYXeLBAafH4YiQcdGrgixYZY',
     })
-    render json: {message: "success"}, :status => 202
+    render json: {success: true, message: "success"}, :status => 202
   end
 
   def verify

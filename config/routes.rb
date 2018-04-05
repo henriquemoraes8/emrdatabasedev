@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     delete "/users/sign_out" => "devise/users/sessions#destroy", :as => :destroy_user_session
     post "/users" => "devise/users/registrations#create", :as => :create_user
     patch "/users" => "devise/users/registrations#update", :as => :update_user
+    post "/users/forgot_password" => "devise/users/registrations#forgot_password", :as => :forgot_password_user
+    post "/users/password" => "devise/users/registrations#password", :as => :change_password_user
   end
 
   resource :user, only: [:update] do
@@ -43,7 +45,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [] do
-    post :validate, :verify
+    post :validate, :verify, :password
   end
 
   resource :clinic, only: [:update] do

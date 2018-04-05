@@ -4,7 +4,6 @@ module Devise
     #include Accessible
 
     before_action :configure_sign_up_params, only: [:create]
-    before_action :configure_account_update_params, :authenticate, only: [:update]
 
     # GET /resource/sign_up
     # def new
@@ -16,6 +15,25 @@ module Devise
       super do |resource|
         render json: { user: resource }.to_json and return
       end
+    end
+
+    def password
+      validation = Validation.find_by(code: params[:token])
+      (render json: {success: false, message: "invalid token"}, :status => 401 if validation.nil?) && return
+      user = validation.user
+      unless user.update(password: params[:password], password_confirmation: params[:password_confirmation] || "", status: User.statuses[:active])
+        render json: {success: false, message: "password and confirmation do not match"}, :status => 401
+        return
+      end
+      validation.destroy
+      render 'users/show', :status => 202
+    end
+
+    def forgot_password
+      user = User.find_by(email: params[:email])
+      validation = Validation.create(user_id: user.id, code: SecureRandom.hex(4))
+      ValidationMailer.forgot_password_email(validation).deliver
+      render json: {success: true}, :status => 202
     end
 
     # GET /resource/edit
@@ -44,25 +62,12 @@ module Devise
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :last_name, :birth_date, :phone, :social, address: [:street, :city, :zip, :apt, :state]])
     end
 
-    # If you have extra params to permit, append them to the sanitizer.
-    def configure_account_update_params
-      params.require(:user).permit([:name, :last_name, :phone, :birth_date, :password, :password_confirmation, :current_password, address: [:street, :city, :zip, :apt, :state]])
-    end
-
     def authenticate
       @user = User.find_by_email("r@gmail.com")#authentication_token(request.headers['X-TOKEN'])
       render json: {message: "user does not exist"}, :status => 401 if @user.nil?
     end
 
-    # The path used after sign up.
-    # def after_sign_up_path_for(resource)
-    #   super(resource)
-    # end
-
-    # The path used after sign up for inactive accounts.
-    # def after_inactive_sign_up_path_for(resource)
-    #   super(resource)
-    # end
   end
+
 end
 

@@ -12,6 +12,7 @@ class ShareRequest < ApplicationRecord
   def default_values
     self.status ||= ShareRequest.statuses[:pending]
     self.is_patient = true if self.is_patient.nil?
+    self.password ||= SecureRandom.hex(4)
   end
 
   def generate_token
