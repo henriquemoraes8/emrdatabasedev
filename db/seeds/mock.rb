@@ -18,6 +18,8 @@ User.create(name: 'Roberto', last_name: 'Genime', email: 'rob@gmail.com', passwo
 User.create(name: 'Amanda', last_name: 'Bortner', email: 'amanda@gmail.com', password: 'A12344321', social: '23914876', phone: '7855262346', insurance_unique_id: "C83209381", birth_date: Date.new(1988, 3, 2))
 User.create(name: 'Kenny', last_name: 'Segall', email: 'kenn@gmail.com', password: 'A12344321', social: '4271864968', phone: '7347246', insurance_unique_id: "D83209381", birth_date: Date.new(1987, 3, 2))
 User.create(name: 'Rafa', last_name: 'Assis', email: 'rafazassis@gmail.com', password: 'A12344321', social: '466671864968', phone: '+5511970877399', insurance_unique_id: "D8320dsd9381", birth_date: Date.new(1927, 3, 2))
+User.create(name: 'Henrique', last_name: 'Rusca', email: 'henrique.rusca@gmail.com', password: 'A12344321', social: '46643671864968', phone: '3053638773', insurance_unique_id: "D8320d44sd9381", birth_date: Date.new(1927, 3, 2))
+
 
 Clinic.create(name: 'Miami Cardiology', phone: '42987132', email: 'miami@cardiology.com', password: 'A12344321')
 Clinic.create(name: 'Orthopedists Heaven', phone: '4214323441', email: 'miami@ortho.com', password: 'A12344321')

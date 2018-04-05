@@ -30,24 +30,27 @@ class ClinicsController < ApplicationController
     render 'records/index', :status => 202
   end
 
+  def verify_user_and_email
+    unless verify_user_with_code(params[:user_id], params[:code])
+      return
+    end
+    access_email
+  end
+
   def access_email
-    @share_request = ShareRequest.create(user_id: params[:user_id], clinic_id: @clinic.id)
-    ValidationMailer.validation_email(@share_request).deliver
+    @share_request = request_via_email(User.find(params[:user_id]), @clinic)
     render 'share_requests/show', :status => 202
   end
 
+  def verify_user_and_message
+    unless verify_user_with_code(params[:user_id], params[:code])
+      return
+    end
+    access_phone
+  end
+
   def access_phone
-    @share_request = ShareRequest.create(user_id: params[:user_id], clinic_id: @clinic.id)
-    user = @share_request.user
-    link = "https://emr-database.herokuapp.com/#/request?request_token=#{@share_request.token}"
-
-    uri = URI.parse("https://textbelt.com/text")
-    Net::HTTP.post_form(uri, {
-        :phone => user.phone_digits,
-        :message => "#{@clinic.name} has requested access to your medical records. To allow, click on the following link #{link}",
-        :key => 'aa16cce9f3352b251c9c0aece4c17b4d645fbc23GxYXeLBAafH4YiQcdGrgixYZY',
-    })
-
+    @share_request = request_via_phone(User.find(params[:user_id]), @clinic)
     render 'share_requests/show', :status => 202
   end
 

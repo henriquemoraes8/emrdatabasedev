@@ -55,6 +55,8 @@ Rails.application.routes.draw do
       resource :access, only: [] do
         post :sms, to: 'clinics#access_phone'
         post :email, to: 'clinics#access_email'
+        post :verify_and_email, to: 'clinics#verify_user_and_email'
+        post :verify_and_message, to: 'clinics#verify_user_and_message'
       end
 
       resources :clinic, only: [] do

@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     Validation.create(user_id: user.id, code: code)
     uri = URI.parse("https://textbelt.com/text")
     Net::HTTP.post_form(uri, {
-        :phone => user.phone_digits,
+        :phone => user.phone,
         :message => "Hello #{user.name}, your verification code is #{code}",
         :key => 'aa16cce9f3352b251c9c0aece4c17b4d645fbc23GxYXeLBAafH4YiQcdGrgixYZY',
     })
@@ -31,19 +31,7 @@ class UsersController < ApplicationController
   end
 
   def verify
-    validation = Validation.find_by(user_id: params[:user_id])
-    if validation.nil?
-      (render json: {message: "no code has been set", success: false}, :status => 401) && return
-    elsif validation.expiration < DateTime.now
-      (render json: {message: "code has expired", success: false}, :status => 401) && return
-    elsif validation.code != params[:code]
-      (render json: {message: "wrong code", success: false}, :status => 401) && return
-    end
-
-    user = User.find_by(id: params[:user_id])
-    user.status = User.statuses[:active]
-    user.save
-    validation.destroy
+    verify_user_with_code(params[:user_id], params[:code])
     render json: {success: true}, :status => 202
   end
 

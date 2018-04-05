@@ -23,7 +23,7 @@ class ShareRequest < ApplicationRecord
 
   def prevent_update
     return true if self.status == ShareRequest.statuses[:pending]
-    self.errors.add_to_base "request is untamperable"
+    errors.add(:status, :cannot_change, message: "request is untamperable")
     false
   end
 
