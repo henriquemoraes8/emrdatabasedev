@@ -13,6 +13,9 @@ module Devise
     # POST /resource
     def create
       super do |resource|
+        unless Clinic.find_by_authentication_token(request.headers['X-TOKEN']).nil?
+          forgot_password_flow(resource.email)
+        end
         render json: { user: resource }.to_json and return
       end
     end
@@ -30,9 +33,7 @@ module Devise
     end
 
     def forgot_password
-      user = User.find_by(email: params[:email])
-      validation = Validation.create(user_id: user.id, code: SecureRandom.hex(4))
-      ValidationMailer.forgot_password_email(validation).deliver
+      forgot_password_flow(params[:email])
       render json: {success: true}, :status => 202
     end
 
@@ -62,9 +63,10 @@ module Devise
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :last_name, :birth_date, :phone, :social, address: [:street, :city, :zip, :apt, :state]])
     end
 
-    def authenticate
-      @user = User.find_by_email("r@gmail.com")#authentication_token(request.headers['X-TOKEN'])
-      render json: {message: "user does not exist"}, :status => 401 if @user.nil?
+    def forgot_password_flow(email)
+      user = User.find_by(email: email)
+      validation = Validation.create(user_id: user.id, code: SecureRandom.hex(4))
+      ValidationMailer.forgot_password_email(validation).deliver
     end
 
   end
