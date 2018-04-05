@@ -113,7 +113,7 @@ class UsersController < ApplicationController
   protected
 
   def authenticate
-    @user = User.find_by_email("r@gmail.com")# User.find_by_authentication_token(request.headers['X-TOKEN'])
+    @user = User.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {message: "user does not exist"}, :status => 401 if @user.nil?
   end
 

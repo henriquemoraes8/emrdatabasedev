@@ -830,7 +830,7 @@ INFORMATION FOR TREATMENT &amp; QUALITY OF CARE</span></b></p>
 of Birth (mm/dd/yyyy): <b><%= "#{@user.birth_date.strftime("%m/%d/%Y")}" %></b></span></p>
 
   <p class=MsoNormal style='line-height:200%'><span style='font-family:"Calibri",sans-serif'>Cell
-Phone Number: <b><%= "#{@user.phone}" %></b></span></p>
+Phone Number: <b><%= ActiveSupport::NumberHelper.number_to_phone("#{@user.phone}") %></b></span></p>
 
   <p class=MsoNormal style='line-height:200%'><span style='font-family:"Calibri",sans-serif'>Address: <b><%= "#{@address.street}" %></b>
                                                                         City: <b><%= "#{@address.city}" %></b>              State: <b><%= "#{@address.state}" %></b>
