@@ -41,7 +41,7 @@ Insurance.all.each do |u|
 end
 
 (1..50).each do |i|
-  r = Record.new(url: "https://www.ghs.org/wp-content/uploads/2015/11/medical-record.jpg", name: "record #{i}", mime_type: "image/jpeg")
+  r = Record.new(url: "https://www.ghs.org/wp-content/uploads/2015/11/medical-record.jpg", name: "record #{i}", mime_type: "image/jpeg", file_size: i * 50)
   r.user = User.offset(rand(User.count)).first
   r.owner_clinic = Clinic.offset(rand(Clinic.count)).first
   r.record_types << RecordType.offset(rand(RecordType.count)).first
