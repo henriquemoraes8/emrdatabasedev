@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def social
-    self[:social].gsub(/(?=\d{5})\d/,"*")
+    self[:social].nil? ? "" : self[:social].gsub(/(?=\d{5})\d/,"*")
   end
 
   private

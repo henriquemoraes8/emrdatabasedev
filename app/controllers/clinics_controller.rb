@@ -54,6 +54,14 @@ class ClinicsController < ApplicationController
     render 'share_requests/show', :status => 202
   end
 
+  def add_insurance_to_user
+    user = User.find(params[:user_id])
+    user.insurance_unique_id = params[:insurance_unique_id]
+    user.insurance_id = params[:insurance_id]
+    user.save!
+    render json: {success: true}, :status => 202
+  end
+
   def upload_file
 
     #try auth clinic, Henrique como a frame do angular de upload n deixar eu colocar header estou passando o token por parametro

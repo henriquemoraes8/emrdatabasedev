@@ -30,17 +30,15 @@ Rails.application.routes.draw do
   end
 
   resource :user, only: [:update] do
-    member do
-      get :records, :clinics, :requests
-      resources :clinics, only: [] do
-        get :records, to: 'users#records_by_clinic'
-      end
-      resources :requests, param: :token, only: [] do
-        post :approve, to: 'users#approve_request'
-        post :deny, to: 'users#deny_request'
-        get :info, to: 'users#info_by_request_token'
-        patch :consent_form, to: 'users#consent_form'
-      end
+    get :records, :clinics, :requests
+    resources :clinics, only: [] do
+      get :records, to: 'users#records_by_clinic'
+    end
+    resources :requests, param: :token, only: [] do
+      post :approve, to: 'users#approve_request'
+      post :deny, to: 'users#deny_request'
+      get :info, to: 'users#info_by_request_token'
+      patch :consent_form, to: 'users#consent_form'
     end
   end
 
@@ -64,6 +62,9 @@ Rails.application.routes.draw do
       resources :clinic, only: [] do
         get :records, to: 'clinics#records_by_clinic'
       end
+
+      patch 'insurances/:insurance_id', to: 'clinics#add_user_to_insurance'
+
     end
 
     resource :requests, :controller => :clinics, only: [] do
