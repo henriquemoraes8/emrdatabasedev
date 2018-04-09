@@ -28,11 +28,8 @@ class User < ApplicationRecord
   scope :birth_date_query, -> (start_date) { where birth_date: start_date.all_day }
 
   def clinics
-    result = []
-    records.includes(:owner_clinic).each do |r|
-      result.append(r.owner_clinic)
-    end
-    result.uniq
+    clinic_ids = share_requests.where(status: ShareRequest.statuses[:approved]).map {|r| r.clinic_id }
+    Clinic.where(id: clinic_ids)
   end
 
   def social

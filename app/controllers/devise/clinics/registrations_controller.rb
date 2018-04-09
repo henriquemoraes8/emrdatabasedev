@@ -4,9 +4,7 @@ module Devise
   class Clinics::RegistrationsController < Devise::RegistrationsController
     #include Accessible
 
-    skip_before_filter :authenticate_clinic!
-
-    # before_action :configure_sign_up_params, only: [:create]
+    before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
 
     # GET /resource/sign_up
