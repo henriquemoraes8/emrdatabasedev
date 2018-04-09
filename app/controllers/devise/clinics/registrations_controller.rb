@@ -47,7 +47,7 @@ module Devise
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone, address: [:street, :city, :zip, :apt, :state]])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone, address_attributes: [:street, :city, :zip, :apt, :state]])
     end
 
     # If you have extra params to permit, append them to the sanitizer.

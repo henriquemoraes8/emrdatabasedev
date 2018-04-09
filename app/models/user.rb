@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_one :validation, :dependent => :destroy
   belongs_to :insurance, :optional => true
 
+  accepts_nested_attributes_for :address
+
   enum status: [:inactive, :active]
 
   before_create :default_values
