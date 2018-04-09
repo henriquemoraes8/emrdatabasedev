@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   require 'net/https'
   require 'uri'
 
-  before_action :authenticate, except: [:records, :records_by_clinic, :clinics, :requests]
+  before_action :authenticate, only: [:records, :records_by_clinic, :clinics, :requests]
   before_action :authenticate_request, only: [:info_by_request_token, :approve_request, :deny_request, :consent_form]
 
   def update
