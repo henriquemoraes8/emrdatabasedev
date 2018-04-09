@@ -12,7 +12,8 @@ class Clinic < ApplicationRecord
   accepts_nested_attributes_for :address
 
   def users
-    User.where(id: records.map{|r| r.user_id})
+    user_ids = share_requests.where(status: ShareRequest.statuses[:approved]).map {|r| r.user_id }
+    User.where(id: user_ids)
   end
 
 end
