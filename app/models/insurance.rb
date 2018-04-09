@@ -7,5 +7,5 @@ class Insurance < ApplicationRecord
   has_many :users
 
   accepts_nested_attributes_for :address
-  
+
 end

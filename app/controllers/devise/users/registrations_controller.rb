@@ -65,7 +65,7 @@ module Devise
 
     def forgot_password_flow(email)
       user = User.find_by(email: email)
-      validation = Validation.create(user_id: user.id, code: SecureRandom.hex(4))
+      validation = Validation.create(user_id: user.id, code: SecureRandom.urlsafe_base64(nil, false))
       ValidationMailer.forgot_password_email(validation).deliver
     end
 
