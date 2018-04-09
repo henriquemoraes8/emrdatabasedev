@@ -7,9 +7,6 @@ module Devise
     # POST /resource
     def create
       super do |resource|
-        unless Clinic.find_by_authentication_token(request.headers['X-TOKEN']).nil?
-          forgot_password_flow(resource.email)
-        end
         render json: { user: resource }.to_json and return
       end
     end

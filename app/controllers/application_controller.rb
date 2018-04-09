@@ -40,6 +40,11 @@ class ApplicationController < ActionController::Base
     user.status = User.statuses[:active]
     user.save
     validation.destroy
+
+    unless Clinic.find_by_authentication_token(request.headers['X-TOKEN']).nil?
+      forgot_password_flow(user.email)
+    end
+
     true
   end
 
