@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     user.save
     validation.destroy
 
-    unless Clinic.find_by_authentication_token(request.headers['X-TOKEN']).nil?
+    unless @clinic.nil?
       forgot_password_flow(user.email)
     end
 
