@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68768905-500b-4664-8c4a-6df2f6e38c28" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/controllers/users_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-      <change beforePath="$PROJECT_DIR$/app/views/users/consent_form.erb" afterPath="$PROJECT_DIR$/app/views/users/consent_form.erb" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/clinics_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/clinics_controller.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -47,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clinics_controller.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="clinics_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/clinics_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="75" column="14" lean-forward="false" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+            <state relative-caret-position="405">
+              <caret line="27" column="52" lean-forward="true" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -81,17 +80,17 @@
         <entry file="file://$PROJECT_DIR$/db/migrate/20180317170250_add_tokens.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="consent_form.erb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="consent_form.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/users/consent_form.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15450">
-              <caret line="1062" column="37" lean-forward="true" selection-start-line="1062" selection-start-column="37" selection-end-line="1062" selection-end-column="37" />
+              <caret line="1062" column="37" lean-forward="false" selection-start-line="1062" selection-start-column="37" selection-end-line="1062" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -121,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="146">
-              <caret line="66" column="14" lean-forward="true" selection-start-line="66" selection-start-column="14" selection-end-line="66" selection-end-column="14" />
+              <caret line="66" column="14" lean-forward="false" selection-start-line="66" selection-start-column="14" selection-end-line="66" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -210,11 +209,11 @@
         <option value="$PROJECT_DIR$/app/controllers/devise/insurances/registrations_controller.rb" />
         <option value="$PROJECT_DIR$/config/initializers/devise.rb" />
         <option value="$PROJECT_DIR$/app/views/clinics/show.rabl" />
-        <option value="$PROJECT_DIR$/app/controllers/clinics_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/devise/users/registrations_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/users/consent_form.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/clinics_controller.rb" />
       </list>
     </option>
   </component>
@@ -592,12 +591,12 @@
       <workItem from="1520435450083" duration="88000" />
       <workItem from="1520804562489" duration="15202000" />
       <workItem from="1521507522417" duration="18597000" />
-      <workItem from="1522112822311" duration="49854000" />
+      <workItem from="1522112822311" duration="50043000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132756000" />
+    <option name="totallyTimeSpent" value="132945000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="23" width="1280" height="773" extended-state="6" />
@@ -1024,15 +1023,7 @@
     <entry file="file://$PROJECT_DIR$/db/migrate/20180317170250_add_tokens.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/clinics_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="75" column="14" lean-forward="false" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1040,7 +1031,7 @@
     <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
-          <caret line="66" column="14" lean-forward="true" selection-start-line="66" selection-start-column="14" selection-end-line="66" selection-end-column="14" />
+          <caret line="66" column="14" lean-forward="false" selection-start-line="66" selection-start-column="14" selection-end-line="66" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -1048,7 +1039,15 @@
     <entry file="file://$PROJECT_DIR$/app/views/users/consent_form.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15450">
-          <caret line="1062" column="37" lean-forward="true" selection-start-line="1062" selection-start-column="37" selection-end-line="1062" selection-end-column="37" />
+          <caret line="1062" column="37" lean-forward="false" selection-start-line="1062" selection-start-column="37" selection-end-line="1062" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/clinics_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="52" lean-forward="true" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
           <folding />
         </state>
       </provider>

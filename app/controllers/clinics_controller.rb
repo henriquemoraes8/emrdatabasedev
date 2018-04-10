@@ -66,12 +66,12 @@ class ClinicsController < ApplicationController
 
     #try auth clinic, Henrique como a frame do angular de upload n deixar eu colocar header estou passando o token por parametro
     @clinic = Clinic.find_by_authentication_token(params[:clinic_token])
-    render json: {success: false, message: "clinic not valid"}, :status => 401 if @clinic.nil?
+    render json: {success: false, message: "clinic not valid"}, :status => 406 if @clinic.nil?
 
     #try upload to user
     @user = @clinic.users.find_by(id: params[:user_id])
-    render json: {success: false, message: "user not validated on clinic"}, :status => 401 if @user.nil?
-    render json: {success: false, message: "missing record types"}, :status => 401 if params[:record_types].nil?
+    render json: {success: false, message: "user not validated on clinic"}, :status => 406 if @user.nil?
+    render json: {success: false, message: "missing record types"}, :status => 406 if params[:record_types].nil?
 
     #AZURE CONNECTION TO BLOB IMAGES
     blobs = Azure::Blob::BlobService.new
