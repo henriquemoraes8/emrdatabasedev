@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   Azure.config.storage_account_name = "emergedb"
   Azure.config.storage_access_key = "FZ424WoKBucuSBsO8+G7MYRRtncTqWbZ2Sd7KxmecyQa2Gk+1NkQMi+dILPTCzQECB2sZTZ79Uupy6UXuegt/Q=="
 
+  protected
+
   def request_via_phone(user, clinic)
     share_request = ShareRequest.create(user_id: user.id, clinic_id: clinic.id)
     link = "https://emr-database.herokuapp.com/#/request?request_token=#{share_request.token}"
@@ -29,11 +31,11 @@ class ApplicationController < ActionController::Base
   def verify_user_with_code(user_id, code)
     validation = Validation.find_by(user_id: user_id)
     if validation.nil?
-      (render json: {message: "no code has been set", success: false}, :status => 401) && (return false)
+      (render json: {message: "no code has been set", success: false}, :status => 406) && (return false)
     elsif validation.expiration < DateTime.now
-      (render json: {message: "code has expired", success: false}, :status => 401) && (return false)
+      (render json: {message: "code has expired", success: false}, :status => 406) && (return false)
     elsif validation.code != code
-      (render json: {message: "wrong code", success: false}, :status => 401) && (return false)
+      (render json: {message: "wrong code", success: false}, :status => 406) && (return false)
     end
 
     user = User.find_by(id: user_id)
@@ -46,6 +48,12 @@ class ApplicationController < ActionController::Base
     end
 
     true
+  end
+
+  def forgot_password_flow(email)
+    user = User.find_by(email: email)
+    validation = Validation.create(user_id: user.id, code: SecureRandom.urlsafe_base64(nil, false))
+    ValidationMailer.forgot_password_email(validation).deliver
   end
 
 end

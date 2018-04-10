@@ -45,12 +45,6 @@ module Devise
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :last_name, :birth_date, :phone, :social, address_attributes: [:street, :city, :zip, :apt, :state]])
     end
 
-    def forgot_password_flow(email)
-      user = User.find_by(email: email)
-      validation = Validation.create(user_id: user.id, code: SecureRandom.urlsafe_base64(nil, false))
-      ValidationMailer.forgot_password_email(validation).deliver
-    end
-
   end
 
 end
