@@ -64,6 +64,7 @@ class UsersController < ApplicationController
   def consent_form
     @user = @request.user
     @address = @user.address
+    @clinic = @request.clinic
     @is_patient = params[:is_patient] || true
     @legal_name = params[:legal_name]
     @legal_relationship = params[:legal_relation]
