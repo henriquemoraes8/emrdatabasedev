@@ -29,7 +29,7 @@ Insurance.create(name: 'Progressive', phone: '4298557132', email: 'miami@prog.co
 Insurance.create(name: 'Blue Cross', phone: '421436623441', email: 'blue@cross.com', password: 'A12344321')
 
 User.all.each do |u|
-  Address.create(street: '1300 S Miami Ave', zip: '33130', state: 'FL', city: 'Miami', apt:"#{u.id + 100}", user_id: u.id)
+  Address.create(zip: '33130')
   u.insurance = Insurance.offset(rand(Insurance.count)).first
   u.save
 end

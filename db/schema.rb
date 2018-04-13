@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180406153413) do
+ActiveRecord::Schema.define(version: 20180413040700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20180406153413) do
     t.datetime "authentication_token_created_at"
     t.index ["address_id"], name: "index_clinics_on_address_id"
     t.index ["authentication_token"], name: "index_clinics_on_authentication_token", unique: true
+    t.index ["phone"], name: "index_clinics_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_clinics_on_reset_password_token", unique: true
   end
 
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 20180406153413) do
     t.datetime "authentication_token_created_at"
     t.index ["address_id"], name: "index_insurances_on_address_id"
     t.index ["authentication_token"], name: "index_insurances_on_authentication_token", unique: true
+    t.index ["phone"], name: "index_insurances_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_insurances_on_reset_password_token", unique: true
   end
 
@@ -158,6 +160,7 @@ ActiveRecord::Schema.define(version: 20180406153413) do
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["insurance_id"], name: "index_users_on_insurance_id"
+    t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["social"], name: "index_users_on_social", unique: true
   end

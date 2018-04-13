@@ -28,6 +28,10 @@ module Devise
       render json: {success: true}, :status => 202
     end
 
+    def email_exists?
+      render json: { exists: User.exists?(email: params[:email]) }, :status => 202
+    end
+
     # GET /resource/edit
     # def edit
     #   super

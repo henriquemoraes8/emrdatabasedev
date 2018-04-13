@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     patch "/users" => "devise/users/registrations#update", :as => :update_user
     post "/users/forgot_password" => "devise/users/registrations#forgot_password", :as => :forgot_password_user
     post "/users/password" => "devise/users/registrations#password", :as => :change_password_user
+    get "/users/email_exists" => "devise/users/registrations#email_exists?", :as => :exists_email_user
   end
 
   resource :user, only: [:update] do
