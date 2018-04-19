@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  insurance: one
+  policy_number: MyString
+  policy_group: one
+
+two:
+  user: two
+  insurance: two
+  policy_number: MyString
+  policy_group: two

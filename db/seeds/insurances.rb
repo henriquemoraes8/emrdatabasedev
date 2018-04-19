@@ -1,0 +1,5 @@
+InsuranceName.create(name: "Blue Cross Blue Shield")
+InsuranceName.create(name: "Aetna")
+InsuranceName.create(name: "Avmed")
+InsuranceName.create(name: "Cigna")
+InsuranceName.create(name: "United")

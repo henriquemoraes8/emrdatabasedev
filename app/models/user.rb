@@ -8,9 +8,11 @@ class User < ApplicationRecord
   has_many :records, -> {order 'created_at DESC'}, :dependent => :destroy
   has_one :address, :dependent => :destroy
   has_one :validation, :dependent => :destroy
-  belongs_to :insurance, :optional => true
+  has_one :policy, :dependent => :destroy
+  has_one :insurance, :through => :policy
 
   accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :policy
 
   enum status: [:inactive, :active]
 

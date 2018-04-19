@@ -1,6 +1,11 @@
 class InsurancesController < ApplicationController
 
-  before_action :authenticate
+  before_action :authenticate, except: [:index]
+
+  def index
+    @insurances = Insurance.all
+    render 'insurances/index_limited', :status => 202
+  end
 
   def update
     if @insurance.update_with_password(insurance_params)

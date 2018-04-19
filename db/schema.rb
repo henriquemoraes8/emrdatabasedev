@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413040700) do
+ActiveRecord::Schema.define(version: 20180418030403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,26 @@ ActiveRecord::Schema.define(version: 20180413040700) do
     t.index ["authentication_token"], name: "index_insurances_on_authentication_token", unique: true
     t.index ["phone"], name: "index_insurances_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_insurances_on_reset_password_token", unique: true
+  end
+
+  create_table "policies", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "insurance_id"
+    t.string "policy_number"
+    t.bigint "policy_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["insurance_id"], name: "index_policies_on_insurance_id"
+    t.index ["policy_group_id"], name: "index_policies_on_policy_group_id"
+    t.index ["user_id"], name: "index_policies_on_user_id"
+  end
+
+  create_table "policy_groups", force: :cascade do |t|
+    t.string "group_number"
+    t.bigint "insurance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["insurance_id"], name: "index_policy_groups_on_insurance_id"
   end
 
   create_table "record_types", force: :cascade do |t|
@@ -181,6 +201,10 @@ ActiveRecord::Schema.define(version: 20180413040700) do
   add_foreign_key "clinics_records", "clinics"
   add_foreign_key "clinics_records", "records"
   add_foreign_key "insurances", "addresses"
+  add_foreign_key "policies", "insurances"
+  add_foreign_key "policies", "policy_groups"
+  add_foreign_key "policies", "users"
+  add_foreign_key "policy_groups", "insurances"
   add_foreign_key "record_types_records", "record_types"
   add_foreign_key "record_types_records", "records"
   add_foreign_key "records", "clinics"

@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   devise_for :insurances, skip: [:sessions, :registrations, :passwords, :confirmations, :omniauth_callbacks, :unlocks]
 
   as :insurance do
-    post "/insurances/sign_in" => "devise/insurance/sessions#create", :as => :insurance_session
-    delete "/insurances/sign_out" => "devise/insurance/sessions#destroy", :as => :destroy_insurance_session
+    post "/insurances/sign_in" => "devise/insurances/sessions#create", :as => :insurance_session
+    delete "/insurances/sign_out" => "devise/insurances/sessions#destroy", :as => :destroy_insurance_session
     post "/insurances" => "devise/insurances/registrations#create", :as => :create_insurance
     patch "/insurances" => "devise/insurances/registrations#update", :as => :update_insurance
   end
@@ -90,6 +90,8 @@ Rails.application.routes.draw do
       post :users, to: 'insurances#search_users'
     end
   end
+
+  resources :insurances, only: [:index]
 
   resources :record_types, only: [:index]
 
