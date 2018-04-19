@@ -32,6 +32,10 @@ module Devise
       render json: { exists: User.exists?(email: params[:email]) }, :status => 202
     end
 
+    def phone_exists?
+      render json: { exists: User.exists?(phone: params[:phone]) }, :status => 202
+    end
+
     # GET /resource/edit
     # def edit
     #   super
