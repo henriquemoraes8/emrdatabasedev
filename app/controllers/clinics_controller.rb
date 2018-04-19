@@ -93,8 +93,7 @@ class ClinicsController < ApplicationController
     puts "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
 
     #Path do arquivo feito upload = "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
-
-    @record = Record.create(user_id: @user.id, clinic_id: @clinic.id, name: params[:name], url: thumb_final_name, mime_type: "image/jpeg")
+    @record = Record.create(user_id: @user.id, clinic_id: @clinic.id, name: params[:name], url: thumb_final_name, mime_type: "#{file.content_type}", file_size: file.size)
     params[:record_types].split(',').each do |t|
       @record.record_types << RecordType.find(t.to_i)
     end

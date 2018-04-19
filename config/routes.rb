@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     post "/users/forgot_password" => "devise/users/registrations#forgot_password", :as => :forgot_password_user
     post "/users/password" => "devise/users/registrations#password", :as => :change_password_user
     get "/users/email_exists" => "devise/users/registrations#email_exists?", :as => :exists_email_user
+    get "/users/phone_exists" => "devise/users/registrations#phone_exists?", :as => :exists_phone_user
   end
 
   resource :user, only: [:update] do
