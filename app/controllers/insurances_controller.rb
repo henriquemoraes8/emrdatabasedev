@@ -11,7 +11,7 @@ class InsurancesController < ApplicationController
     if @insurance.update_with_password(insurance_params)
       render 'insurances/show', :status => 202
     else
-      render json: {message: "password not valid"}, :status => 401
+      render json: {message: "password not valid"}, :status => 406
     end
   end
 

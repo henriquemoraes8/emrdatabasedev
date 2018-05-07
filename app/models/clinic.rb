@@ -7,7 +7,7 @@ class Clinic < ApplicationRecord
   has_one :address, :dependent => :destroy
   has_many :share_requests, :dependent => :destroy
   has_many :owned_records, -> {order 'created_at DESC'}, :class_name => 'Record', foreign_key: 'clinic_id'
-  has_and_belongs_to_many :records
+  has_and_belongs_to_many :records, -> {order 'created_at DESC'}
 
   accepts_nested_attributes_for :address
 

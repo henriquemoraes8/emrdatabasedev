@@ -73,6 +73,8 @@ Rails.application.routes.draw do
       get :pending, :approved
     end
 
+    delete 'records/:record_id', to: 'clinics#delete_record'
+
     resource :search, :controller => :clinics, only: [] do
       post :users, to: 'clinics#search_users'
       post :all_users, to: 'clinics#search_all_users'

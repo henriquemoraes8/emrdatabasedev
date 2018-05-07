@@ -30,6 +30,16 @@ class ClinicsController < ApplicationController
     render 'records/index', :status => 202
   end
 
+  def delete_record
+    record = @clinic.owned_records.find_by(id: params[:record_id])
+    if record.nil?
+      render json: {success: false, message: "You do not have authorization to delete this record"}, :status => 406
+      return
+    end
+    record.destroy
+    render json: {success: true}, :status => 202
+  end
+
   def verify_user_and_email
     unless verify_user_with_code(params[:user_id], params[:code])
       return
@@ -149,7 +159,8 @@ class ClinicsController < ApplicationController
   protected
 
   def authenticate
-    @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])#Clinic.find_by_email('miami@cardiology.com')
+    @clinic = Clinic.find_by_email('miami@cardiology.com')
+    #@clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 

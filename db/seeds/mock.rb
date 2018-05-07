@@ -9,6 +9,7 @@
 User.destroy_all
 Clinic.destroy_all
 Insurance.destroy_all
+PolicyGroup.destroy_all
 ShareRequest.destroy_all
 Record.destroy_all
 Address.destroy_all
@@ -57,7 +58,7 @@ Clinic.all.each do |c|
 
   User.all.each do |u|
     unless c.users.include?(u)
-      ShareRequest.create(user_id: u.id, clinic_id: c.id)
+      ShareRequest.create(user_id: u.id, clinic_id: c.id, status: ShareRequest.statuses[:approved])
     end
   end
 end
