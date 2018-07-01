@@ -19,6 +19,7 @@ class User < ApplicationRecord
   before_create :default_values
   before_save :adjust_phone
   before_validation :guarantee_password
+  validates :birth_date, :presence => true
 
   scope :search, -> (name, phone, email) {
     name_query = "%#{name.nil? ? "" : name.downcase}%"
