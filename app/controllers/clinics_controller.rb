@@ -15,7 +15,10 @@ class ClinicsController < ApplicationController
   end
 
   def records
-    @records = @clinic.records
+    user = @clinic.users.find_by_id(params[:user_id])
+    (render json: {success: false, message: "user not validated on clinic"}, :status => 406) && return if user.nil?
+
+    @records = user.records
     unless params[:record_types].nil?
       @records = @records.by_types(params[:record_types].split(',').map { |t| t.to_i })
     end
@@ -23,7 +26,10 @@ class ClinicsController < ApplicationController
   end
 
   def records_by_clinic
-    @records = Record.where(user_id: params[:user_id], clinic_id: params[:clinic_id])
+    user = @clinic.users.find_by_id(params[:user_id])
+    render json: {success: false, message: "user not validated on clinic"}, :status => 406 if user.nil?
+
+    @records = user.records
     unless params[:record_types].nil?
       @records = @records.by_types(params[:record_types].split(',').map { |t| t.to_i })
     end
@@ -80,8 +86,8 @@ class ClinicsController < ApplicationController
 
     #try upload to user
     @user = @clinic.users.find_by(id: params[:user_id])
-    render json: {success: false, message: "user not validated on clinic"}, :status => 406 if @user.nil?
-    render json: {success: false, message: "missing record types"}, :status => 406 if params[:record_types].nil?
+    (render json: {success: false, message: "user not validated on clinic"}, :status => 406) && return if @user.nil?
+    (render json: {success: false, message: "missing record types"}, :status => 406) && return if params[:record_types].nil?
 
     #AZURE CONNECTION TO BLOB IMAGES
     blobs = Azure::Blob::BlobService.new
@@ -102,7 +108,7 @@ class ClinicsController < ApplicationController
 
     puts "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
 
-    #Path do arquivo feito upload = "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
+    #Path of the uploaded file = "https://emergedb.blob.core.windows.net/uploads/#{thumb_final_name}"
     @record = Record.create(user_id: @user.id, clinic_id: @clinic.id, name: params[:name], url: thumb_final_name, mime_type: "#{file.content_type}", file_size: file.size)
     params[:record_types].split(',').each do |t|
       @record.record_types << RecordType.find(t.to_i)
@@ -159,8 +165,8 @@ class ClinicsController < ApplicationController
   protected
 
   def authenticate
-    #@clinic = Clinic.find_by_email('miami@cardiology.com')
-    @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
+    @clinic = Clinic.find_by_email('miami@cardiology.com')
+    #@clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false}, :status => 401 if @clinic.nil?
   end
 
