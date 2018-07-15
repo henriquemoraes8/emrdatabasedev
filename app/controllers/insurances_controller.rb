@@ -11,7 +11,7 @@ class InsurancesController < ApplicationController
     if @insurance.update_with_password(insurance_params)
       render 'insurances/show', :status => 202
     else
-      render json: {message: "password not valid"}, :status => 401
+      render json: {message: "password not valid"}, :status => 406
     end
   end
 
@@ -47,7 +47,8 @@ class InsurancesController < ApplicationController
   protected
 
   def authenticate
-    @insurance = Insurance.find_by_authentication_token(request.headers['X-TOKEN']) #Insurance.find_by_email("miami@prog.com")#
+    #@insurance = Insurance.find_by_email("miami@prog.com")
+    @insurance = Insurance.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false}, :status => 401 if @insurance.nil?
   end
 

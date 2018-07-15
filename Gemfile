@@ -48,7 +48,7 @@ gem 'attr_encrypted'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'rails-erd', require: false, group: :development
+gem 'rails-erd', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
