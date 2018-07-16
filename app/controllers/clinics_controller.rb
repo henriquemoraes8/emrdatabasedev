@@ -149,8 +149,6 @@ class ClinicsController < ApplicationController
   protected
 
   def authenticate
-    puts "AUTHENTICATE"
-    puts request.headers['X-TOKEN']
     #@clinic = Clinic.find_by_email('miami@cardiology.com')
     @clinic = Clinic.find_by_authentication_token(request.headers['X-TOKEN'])
     render json: {success: false, error: "clinic not authenticated, please log in again"}, :status => 401 if @clinic.nil?
