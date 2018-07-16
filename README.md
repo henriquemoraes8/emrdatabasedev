@@ -1,24 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<h1>EMeRge database project</h1>
 
-Things you may want to cover:
+<h3>To check the database on Heroku: <h3>
 
-* Ruby version
+* log in on https://dashboard.heroku.com/apps/emr-database-api
+with the EMeRge credentials
 
-* System dependencies
+* on the top right corner, there is a "more" button, click on it and 
+choose "run console"
 
-* Configuration
+* run "rails c" on the console
 
-* Database creation
+* now you are in the database, you can run commands like:
+ 
+     * User.all -> gets all users
+     
+     * Clinic.find(id) -> finds a clinic by id
+     
+     * Insurance.find_by_email('email') -> finds an insurance by email
+     
+     
+<h3>To check text message quota</h3>
 
-* Database initialization
+Open the Terminal app and input
 
-* How to run the test suite
+curl https://textbelt.com/quota/API_KEY
 
-* Services (job queues, cache servers, search engines, etc.)
+where API_KEY is the text belt key
 
-* Deployment instructions
 
-* ...
+
