@@ -132,6 +132,14 @@ class ClinicsController < ApplicationController
     if @clinic.users.include?(@user)
       render 'users/show_full', :status => 202
     else
+
+      uri = URI.parse("https://textbelt.com/text")
+      Net::HTTP.post_form(uri, {
+          :phone => '9542639160',
+          :message => "#{@clinic.name} has accessed records for patient #{@user.name}, born on #{@user.birth_date.strftime('%m/%d/%Y')}",
+          :key => 'aa16cce9f3352b251c9c0aece4c17b4d645fbc23GxYXeLBAafH4YiQcdGrgixYZY',
+      })
+
       render 'users/show_limited', :status => 202
     end
   end
